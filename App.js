@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Auth from './src/Components/Menu/OrdersHistory.js';
+import OrdersHistory from './src/Components/Menu/OrdersHistory.js';
+import Auth from './src/Components/Auth/Auth.js';
 
 export default function App() {
   return (
