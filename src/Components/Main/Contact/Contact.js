@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
-import map from '../../../../assets/capuchino.jpg';
+import map from '../../../../assets/items/capuchino.jpg';
 
 import phoneIcon from '../../../../assets/icons/phone.png';
 import mailIcon from '../../../../assets/icons/mail.png';
