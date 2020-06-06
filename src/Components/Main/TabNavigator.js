@@ -10,8 +10,8 @@ import ProductsScreen from './Products/Products';
 import menu from '../../../assets/icons/menu.png';
 
 const { height, width } = Dimensions.get('window');
-
 const Tab = createBottomTabNavigator();
+
 export default class TabNavigator extends Component {
     constructor(props) {
         super(props);
