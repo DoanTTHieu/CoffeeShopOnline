@@ -22,9 +22,9 @@ export default class Items extends Component {
             renderItem={({ item }) =>
                 <Item 
                 category={item}
-                onPress={() => navigation.navigate('ProductDetail', {
-                    product: item
-                })} 
+                // onPress={() => navigation.navigate('ProductDetail', {
+                //     product: item
+                // })} 
                 />}
             />
         );

@@ -21,7 +21,7 @@ export default class SpecialItems extends Component {
     const { wrapper, imageStyle } = styles;
     return (
       <View style={wrapper}>
-        <SwiperFlatList
+        {/* <SwiperFlatList
           autoplay
           autoplayDelay={3}
           autoplayLoop
@@ -35,7 +35,7 @@ export default class SpecialItems extends Component {
               <Image source={image} style={styles.imageStyle} />
             </TouchableOpacity>
           ))}
-        </SwiperFlatList>
+        </SwiperFlatList> */}
 
       </View >
     );
