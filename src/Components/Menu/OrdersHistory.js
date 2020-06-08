@@ -11,14 +11,20 @@ export default class OrderHistory extends Component {
         this.state = { arrOrder: [] };
     }
 
-
+    goBackToMain() {
+        const { navigation } = this.props;
+        navigation.goBack();
+    }
+    
     render() {
         const { wrapper, header, headerTitle, backIconStyle, body, orderRow } = styles;
         return (
             <View style={wrapper}>
                 <View style={header}>
                     <View />
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={this.goBackToMain.bind(this)}
+                    >
                         <Image source={backSpecial} style={backIconStyle} />
                     </TouchableOpacity>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
