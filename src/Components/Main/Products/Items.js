@@ -10,29 +10,21 @@ export default class Items extends Component {
       isLoading: true,
     };
   }
+    render() {
 
-  render() {
-    const { navigation } = this.props;
-    const data = [
-      { id: 1, name: "Product1 ", price: 20 },
-      { id: 2, name: "Product2 ", price: 30 },
-      { id: 3, name: "Product3 ", price: 40 },
-    ];
-    return (
-      <FlatList
-        data={data}
-        renderItem={({ item }) => (
-          <Item
-            category={item}
-            onPress={() =>
-              navigation.navigate("ProductDetail", {
-                product: item,
-              })
-            }
-          />
-        )}
-        style={{ width: "100%" }}
-      />
-    );
-  }
+        const { navigation } = this.props;
+        const data = [{id: 1, name: "Product1 ",price: 20},{id: 2, name: "Product2 ",price: 30},{id: 3, name: "Product3 ",price: 40}];
+        return (
+            <FlatList
+            data={data}
+            renderItem={({ item }) =>
+                <Item 
+                category={item}
+                // onPress={() => navigation.navigate('ProductDetail', {
+                //     product: item
+                // })} 
+                />}
+            />
+        );
+    }
 }

@@ -11,11 +11,6 @@ import {
 import backSpecial from "../../../assets/icons/blackback.png";
 
 export default class OrderHistory extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { arrOrder: [] };
-  }
-
   render() {
     const {
       wrapper,
