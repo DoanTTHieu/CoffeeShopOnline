@@ -10,7 +10,6 @@ export default class Items extends Component {
       isLoading: true,
     };
   }
-
   render() {
     const { navigation } = this.props;
     const data = [

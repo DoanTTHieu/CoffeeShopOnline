@@ -9,7 +9,11 @@ export default function Item(props) {
       <View style={styles.item}>
         <Image source={image} style={imageStyle} key={category.id} />
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          style={{
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
           <Text style={name}>{category.name}</Text>
           <Text style={price}>{category.price}$</Text>
@@ -28,19 +32,19 @@ const styles = StyleSheet.create({
     shadowColor: "#2E272B",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
+    borderRadius: 5,
   },
   name: {
     fontSize: 20,
-    //fontFamily: 'Avenir',
   },
   imageStyle: {
     width: 150,
     height: 150,
+    borderRadius: 5,
   },
   price: {
     marginBottom: 5,
     paddingLeft: 10,
-    //fontFamily: 'Avenir',
     color: "#0733ba",
   },
 });

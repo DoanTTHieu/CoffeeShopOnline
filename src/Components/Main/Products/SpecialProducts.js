@@ -7,10 +7,7 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import SwiperFlatList from "react-native-swiper-flatlist";
-
-import image from "../../../../assets/items/capuchino.jpg";
-
+import Swiper from "../../Custom/Swiper";
 export default class SpecialItems extends Component {
   constructor(props) {
     super(props);
@@ -25,24 +22,10 @@ export default class SpecialItems extends Component {
   }
 
   render() {
-    const { wrapper, imageStyle } = styles;
+    const { wrapper } = styles;
     return (
       <View style={wrapper}>
-        {/* <SwiperFlatList
-          autoplay
-          autoplayDelay={3}
-          autoplayLoop
-          index={1}
-          showPagination
-          width={imageStyle.width}
-          height={imageStyle.height}
-        >
-          {this.state.types.map((e) => (
-            <TouchableOpacity key={e.id}>
-              <Image source={image} style={styles.imageStyle} />
-            </TouchableOpacity>
-          ))}
-        </SwiperFlatList> */}
+        <Swiper style={styles.swiper} />
       </View>
     );
   }
