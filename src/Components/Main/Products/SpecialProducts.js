@@ -1,20 +1,27 @@
-import React, { Component } from 'react';
-import { View, Image, StyleSheet, Dimensions, TouchableOpacity, Text } from 'react-native';
-import SwiperFlatList from 'react-native-swiper-flatlist';
+import React, { Component } from "react";
+import {
+  View,
+  Image,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Text,
+} from "react-native";
+import SwiperFlatList from "react-native-swiper-flatlist";
 
-import image from '../../../../assets/items/capuchino.jpg';
+import image from "../../../../assets/items/capuchino.jpg";
 
 export default class SpecialItems extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        types: [1,2,3],
+      types: [1, 2, 3],
     };
-}
+  }
 
   goToProductDetail() {
     const { navigation } = this.props;
-    navigation.navigate('ProductDetail');
+    navigation.navigate("ProductDetail");
   }
 
   render() {
@@ -36,20 +43,19 @@ export default class SpecialItems extends Component {
             </TouchableOpacity>
           ))}
         </SwiperFlatList> */}
-
-      </View >
+      </View>
     );
   }
 }
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   wrapper: {
     height: height * 0.3,
-    backgroundColor: '#FFF',
+    backgroundColor: "#FFF",
     margin: 10,
-    shadowColor: '#2E272B',
+    shadowColor: "#2E272B",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.8,
     padding: 10,
@@ -57,16 +63,16 @@ const styles = StyleSheet.create({
   imageStyle: {
     width: width - 40,
     height: height * 0.3,
-    resizeMode: 'cover'
+    resizeMode: "cover",
   },
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    paddingTop: 30
+    backgroundColor: "white",
+    paddingTop: 30,
   },
   child: {
     height: height * 0.3,
     width,
-    justifyContent: 'center'
+    justifyContent: "center",
   },
 });

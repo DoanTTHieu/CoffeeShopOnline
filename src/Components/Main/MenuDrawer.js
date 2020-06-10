@@ -1,30 +1,39 @@
+import React, { Component } from "react";
+import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItem,
+  DrawerItemList,
+} from "@react-navigation/drawer";
 
-import React, { Component } from 'react';
-import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItem,
-  DrawerItemList } from '@react-navigation/drawer'; 
-
-import OrdersHistory from '../Menu/OrdersHistory';
+import OrdersHistory from "../Menu/OrdersHistory";
 //import ChangeInfo from '../Menu/ChangeInfo';
-import account from '../../../assets/icons/account.png';
-import TabNavigator from './TabNavigator';
-import Auth from '../Auth/Auth';
+import account from "../../../assets/icons/account.png";
+import TabNavigator from "./TabNavigator";
+import Auth from "../Auth/Auth";
 class CustomDrawerContent extends Component {
- 
   render() {
-    const { container, profile, btnStyle, btnText, logInContainer, txtUsername } = styles;
+    const {
+      container,
+      profile,
+      btnStyle,
+      btnText,
+      logInContainer,
+      txtUsername,
+    } = styles;
     const logOutJSX = (
       <View style={{ flex: 1 }}>
         <TouchableOpacity
           style={btnStyle}
-          onPress={() => this.props.navigation.navigate('Auth')}
+          onPress={() => this.props.navigation.navigate("Auth")}
         >
           <Text style={btnText}>Sign in</Text>
         </TouchableOpacity>
       </View>
     );
     const logInJSX = (
-      <View style={logInContainer} >
+      <View style={logInContainer}>
         <Text style={txtUsername}>USERNAME</Text>
         <DrawerContentScrollView {...this.props}>
           <DrawerItemList {...this.props} labelStyle={{ fontSize: 18 }} />
@@ -60,19 +69,21 @@ export default class MenuDrawer extends Component {
       <Drawer.Screen name="Orders History" component={OrdersHistory} />
     );
 
-    const logedOut = (
-      <Drawer.Screen name="Auth" component={Auth} />
-    );
+    const logedOut = <Drawer.Screen name="Auth" component={Auth} />;
     const mainJSX = this.state.isLoggedIn ? loggedIn : loggedOut;
 
     return (
-      <View style={{ flex: 1 }} >
+      <View style={{ flex: 1 }}>
         <Drawer.Navigator
-          drawerContent={(props) => 
-            <CustomDrawerContent {...props} getLoginState={this.state.isLoggedIn} />}
-            initialRouteName="Home"
-            drawerStyle={{
-            backgroundColor: '#f7c744',
+          drawerContent={(props) => (
+            <CustomDrawerContent
+              {...props}
+              getLoginState={this.state.isLoggedIn}
+            />
+          )}
+          initialRouteName="Home"
+          drawerStyle={{
+            backgroundColor: "#f7c744",
             width: 240,
           }}
         >
@@ -86,45 +97,41 @@ export default class MenuDrawer extends Component {
 
 const styles = StyleSheet.create({
   customStyle: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   container: {
     flex: 1,
-    backgroundColor: '#f7c744',
-    alignItems: 'center',
-    paddingTop: 100
+    backgroundColor: "#f7c744",
+    alignItems: "center",
+    paddingTop: 100,
   },
   profile: {
     width: 120,
     height: 120,
     borderRadius: 60,
-    marginBottom: 5
+    marginBottom: 5,
   },
   btnStyle: {
     height: 50,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 5,
-    paddingHorizontal: 70
+    paddingHorizontal: 70,
   },
   btnText: {
-    color: '#203546',
-    fontSize: 20
+    color: "#203546",
+    fontSize: 20,
   },
   logInContainer: {
     flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   txtUsername: {
-    color: '#203546',
+    color: "#203546",
     //fontFamily: 'Avenir'
-  }
+  },
 });
-
-
-
-
