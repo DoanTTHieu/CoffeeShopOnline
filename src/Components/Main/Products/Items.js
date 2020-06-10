@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import { FlatList, ActivityIndicator, View } from 'react-native';
+import React, { Component } from "react";
+import { FlatList, ActivityIndicator, View } from "react-native";
 
-import Item from './Item';
+import Item from "./Item";
 
 export default class Items extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-            isLoading: true,
-        };
-    }
-
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+    };
+  }
     render() {
 
         const { navigation } = this.props;
