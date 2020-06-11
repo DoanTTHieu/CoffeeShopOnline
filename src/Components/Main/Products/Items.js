@@ -28,6 +28,7 @@ export default class Items extends Component {
             // })}
           />
         )}
+        style={{ width: "95%" }}
       />
     );
   }

@@ -22,40 +22,10 @@ export default class SpecialItems extends Component {
   }
 
   render() {
-    const { wrapper } = styles;
     return (
-      <View style={wrapper}>
-        <Swiper style={styles.swiper} />
+      <View>
+        <Swiper />
       </View>
     );
   }
 }
-
-const { width, height } = Dimensions.get("window");
-
-const styles = StyleSheet.create({
-  wrapper: {
-    height: height * 0.3,
-    backgroundColor: "#FFF",
-    margin: 10,
-    shadowColor: "#2E272B",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.8,
-    padding: 10,
-  },
-  imageStyle: {
-    width: width - 40,
-    height: height * 0.3,
-    resizeMode: "cover",
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    paddingTop: 30,
-  },
-  child: {
-    height: height * 0.3,
-    width,
-    justifyContent: "center",
-  },
-});
