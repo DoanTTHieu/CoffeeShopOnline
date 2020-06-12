@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import ProductsView from "./ProductsView";
-import ProductDetail from "./ProductDetail";
+import ProductsView from "../screens/Main/Products/ProductsView";
+import ProductDetail from "../screens/Main/Products/ProductDetail";
 
 const Stack = createStackNavigator();
 

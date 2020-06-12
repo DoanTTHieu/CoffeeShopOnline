@@ -1,8 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import OrdersView from "./OrdersView";
-import ProductDetail from "../Products/ProductDetail";
+import OrdersView from "../screens/Main/Orders/OrdersView";
+import ProductDetail from "../screens/Main/Products/ProductDetail";
 
 const Stack = createStackNavigator();
 export default class OrdersScreen extends React.Component {

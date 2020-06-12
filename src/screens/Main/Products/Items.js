@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FlatList, ActivityIndicator, View } from "react-native";
+import { FlatList } from "react-native";
 
 import Item from "./Item";
 

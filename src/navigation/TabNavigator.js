@@ -10,10 +10,10 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
-import ContactScreen from "./Contact/Contact";
-import OrdersScreen from "./Orders/Orders";
-import ProductsScreen from "./Products/Products";
-import menu from "../../../assets/icons/menu.png";
+import ContactScreen from "../screens/Main/Contact/Contact";
+import OrdersScreen from "./OrdersNavigator";
+import ProductsScreen from "./ProductNavigator";
+import menu from "../../assets/icons/menu.png";
 
 const { height, width } = Dimensions.get("window");
 

@@ -7,11 +7,10 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 
-import OrdersHistory from "../Menu/OrdersHistory";
-//import ChangeInfo from '../Menu/ChangeInfo';
-import account from "../../../assets/icons/account.png";
+import OrdersHistory from "../screens/Menu/OrdersHistory";
+import account from "../../assets/icons/account.png";
 import TabNavigator from "./TabNavigator";
-import Auth from "../Auth/Auth";
+import Auth from "../screens/Auth/Auth";
 class CustomDrawerContent extends Component {
   render() {
     const {

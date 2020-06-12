@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import Swiper from "../../Custom/Swiper";
+import Swiper from "../../../components/Swiper";
 export default class SpecialItems extends Component {
   constructor(props) {
     super(props);
