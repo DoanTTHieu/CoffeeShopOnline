@@ -28,7 +28,7 @@ export default class TabNavigator extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.wrapper}>
+        <View style={styles.container}>
           <TouchableOpacity
             onPress={() => {
               this.props.navigation.openDrawer();
@@ -36,7 +36,7 @@ export default class TabNavigator extends Component {
           >
             <Image source={menu} style={{ width: 30, height: 30 }} />
           </TouchableOpacity>
-          <TextInput style={styles.textInput} placeholder="SEARCH" />
+          <TextInput style={styles.searchBox} placeholder="SEARCH" />
         </View>
 
         <Tab.Navigator
@@ -69,22 +69,18 @@ export default class TabNavigator extends Component {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    height: height / 15,
+  container: {
+    height: height / 10,
     backgroundColor: "#f7c744",
     flexDirection: "row",
     padding: 10,
+    paddingTop: "8%",
     justifyContent: "space-around",
   },
-  textInput: {
+  searchBox: {
     height: height / 25,
     width: width * 0.8,
     backgroundColor: "#FFF",
     paddingLeft: 10,
-  },
-  container: {
-    backgroundColor: "rgb(32,53,70)",
-    flex: 1,
-    flexDirection: "column",
   },
 });

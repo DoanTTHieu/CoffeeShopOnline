@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
   StyleSheet,
   Keyboard,
-  TextInput,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
 } from "react-native";
 import back from "../../../assets/icons/back.png";
 import cup from "../../../assets/icons/cup.png";
 
+import AuthInput from "../../components/AuthInput";
 export default class Auth extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +21,7 @@ export default class Auth extends Component {
       password: "",
       email: "",
       rePassword: "",
-      isSignIn: false,
+      isSignIn: true,
     };
   }
   SignIn() {
@@ -33,7 +33,7 @@ export default class Auth extends Component {
 
   render() {
     const {
-      row1,
+      header,
       iconStyle,
       titleStyle,
       container,
@@ -41,22 +41,22 @@ export default class Auth extends Component {
       btnSignUp,
       inactiveStyle,
       activeStyle,
-      controlStyle,
+      control,
       keyboardContainer,
       infoContainer,
-      input,
       buttonContainer,
       buttonText,
     } = styles;
     const SignInJSX = (
       <View style={infoContainer}>
-        <TextInput
+        <AuthInput placeholder="Username" returnKeyType="next" />
+        <AuthInput placeholder="Password" returnKeyType="go" isPassword />
+        {/* <TextInput
           style={input}
           placeholder="Username"
           placeholderTextColor="rgba(255,255,255,0.8)"
           returnKeyType="next"
           autoCorrect={false}
-          onSubmitEditing={() => this.refs.txtPassword.focus()}
           onChangeText={(username) => this.setState({ username })}
           value={this.state.username}
         />
@@ -65,13 +65,16 @@ export default class Auth extends Component {
           placeholder="Password"
           placeholderTextColor="rgba(255,255,255,0.8)"
           returnKeyType="go"
-          secureTextEntry
+          secureTextEntry={true}
           autoCorrect={false}
           ref={"txtPassword"}
           onChangeText={(password) => this.setState({ password })}
           value={this.state.password}
-        />
-        <TouchableOpacity style={buttonContainer}>
+        /> */}
+        <TouchableOpacity
+          style={buttonContainer}
+          onPress={() => this.props.navigation.navigate("Menu")}
+        >
           <Text style={buttonText}>SIGN IN NOW </Text>
         </TouchableOpacity>
       </View>
@@ -79,7 +82,19 @@ export default class Auth extends Component {
 
     const SignUpJSX = (
       <View style={infoContainer}>
-        <TextInput
+        <AuthInput placeholder="Enter your username" returnKeyType="next" />
+        <AuthInput placeholder="Enter your email" returnKeyType="next" />
+        <AuthInput
+          placeholder="Enter your password"
+          returnKeyType="next"
+          isPassword
+        />
+        <AuthInput
+          placeholder="Re-enter your password"
+          returnKeyType="go"
+          isPassword
+        />
+        {/* <TextInput
           style={input}
           placeholder="Enter your username"
           placeholderTextColor="rgba(255,255,255,0.8)"
@@ -123,7 +138,7 @@ export default class Auth extends Component {
           ref={"txtRePassword"}
           onChangeText={(rePassword) => this.setState({ rePassword })}
           value={this.state.rePassword}
-        />
+        /> */}
         <TouchableOpacity style={buttonContainer}>
           <Text style={buttonText}>SIGN UP NOW </Text>
         </TouchableOpacity>
@@ -134,7 +149,7 @@ export default class Auth extends Component {
 
     return (
       <View style={container}>
-        <View style={row1}>
+        <View style={header}>
           <TouchableOpacity>
             <Image source={back} style={iconStyle} />
           </TouchableOpacity>
@@ -153,7 +168,7 @@ export default class Auth extends Component {
           </TouchableWithoutFeedback>
         </View>
 
-        <View style={controlStyle}>
+        <View style={control}>
           <TouchableOpacity style={btnSignIn} onPress={this.SignIn.bind(this)}>
             <Text style={isSignIn ? activeStyle : inactiveStyle}>SIGN IN</Text>
           </TouchableOpacity>
@@ -173,23 +188,24 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "space-between",
   },
-  row1: {
+  header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: 40,
   },
   titleStyle: {
     color: "#f7c744",
-    //fontFamily: 'Avenir',
     fontSize: 30,
   },
   iconStyle: {
     width: 30,
     height: 30,
   },
-  controlStyle: {
+  control: {
     flexDirection: "row",
     alignSelf: "stretch",
+    paddingBottom: 40,
   },
   activeStyle: {
     color: "#203546",
@@ -237,6 +253,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: "#f7c744",
     paddingVertical: 15,
+    marginVertical: 20,
+    borderRadius: 10,
   },
   buttonText: {
     textAlign: "center",

@@ -36,7 +36,13 @@ class CustomDrawerContent extends Component {
         <Text style={txtUsername}>USERNAME</Text>
         <DrawerContentScrollView {...this.props}>
           <DrawerItemList {...this.props} labelStyle={{ fontSize: 18 }} />
-          <DrawerItem label="Sign out" labelStyle={{ fontSize: 18 }} />
+          <DrawerItem
+            label="Sign out"
+            labelStyle={{ fontSize: 18 }}
+            onPress={() => {
+              this.props.navigation.navigate("Auth");
+            }}
+          />
         </DrawerContentScrollView>
       </View>
     );

@@ -12,7 +12,8 @@ export default function Item(props) {
           style={{
             width: "100%",
             justifyContent: "center",
-            alignItems: "center",
+            alignItems: "flex-start",
+            paddingHorizontal: 40,
           }}
         >
           <Text style={name}>{category.name}</Text>
