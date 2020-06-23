@@ -1,13 +1,15 @@
 import React from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
-import image from "../../../../assets/items/capuchino.jpg";
 export default function Item(props) {
   const { imageStyle, price, name } = styles;
-  const { category, onPress } = props;
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity>
       <View style={styles.item}>
-        <Image source={image} style={imageStyle} key={category.id} />
+        <Image
+          source={{ uri: props.imageUrl }}
+          style={imageStyle}
+          key={props.id}
+        />
         <View
           style={{
             width: "100%",
@@ -16,8 +18,8 @@ export default function Item(props) {
             paddingHorizontal: 40,
           }}
         >
-          <Text style={name}>{category.name}</Text>
-          <Text style={price}>{category.price}$</Text>
+          <Text style={name}>{props.title}</Text>
+          <Text style={price}>{props.stock}$</Text>
         </View>
       </View>
     </TouchableOpacity>
