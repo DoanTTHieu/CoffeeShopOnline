@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { FlatList } from "react-native";
 import Item from "./Item";
 
+const localhost = "192.168.218.106"; //đổi localhost thành địa chỉ IPV4 của máy mình
 export default class Items extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +12,7 @@ export default class Items extends Component {
   }
 
   componentDidMount() {
-    const url = "http://localhost:3001/product"; //đổi localhost thành địa chỉ IPV4 của máy mình
+    const url = "http://" + localhost + ":3001/product";
     fetch(url)
       .then((res) => res.json())
       .then((resData) => {

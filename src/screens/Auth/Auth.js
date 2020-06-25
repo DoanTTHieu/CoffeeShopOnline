@@ -8,11 +8,14 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+  TextInput,
 } from "react-native";
 import back from "../../../assets/icons/back.png";
 import cup from "../../../assets/icons/cup.png";
 
 import AuthInput from "../../components/AuthInput";
+
+const localhost = "192.168.218.106";
 export default class Auth extends Component {
   constructor(props) {
     super(props);
@@ -31,6 +34,61 @@ export default class Auth extends Component {
     this.setState({ isSignIn: false });
   }
 
+  SignInHandler = () => {
+    const url = "http://" + localhost + ":3001/auth/login";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 422) {
+          throw new Error("Validation failed!");
+        }
+        if ((res.status != 200) & (res.status != 201)) {
+          throw new Error("Could not authenticate you!");
+        }
+        return res.json();
+      })
+      .then((result) => this.props.navigation.navigate("Menu"))
+      .catch((err) => console.log("Hieu"));
+  };
+
+  SignUpHandler = () => {
+    if (this.state.password !== this.state.rePassword) {
+      throw new Error("Password and re-password does not match!");
+    }
+    const url = "http://" + localhost + ":3001/auth/signup";
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+        username: this.state.username,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 422) {
+          throw new Error(
+            "Validation failed! Make sure the email address isn't used yet!"
+          );
+        }
+        if ((res.status != 200) & (res.status != 201)) {
+          throw new Error("Creating new user failed!");
+        }
+        return res.json();
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     const {
       header,
@@ -47,33 +105,31 @@ export default class Auth extends Component {
       buttonContainer,
       buttonText,
     } = styles;
+
+    const { isSignIn } = this.state;
+
     const SignInJSX = (
       <View style={infoContainer}>
-        <AuthInput placeholder="Username" returnKeyType="next" />
-        <AuthInput placeholder="Password" returnKeyType="go" isPassword />
-        {/* <TextInput
-          style={input}
-          placeholder="Username"
+        <TextInput
+          placeholder="Email"
+          style={styles.input}
           placeholderTextColor="rgba(255,255,255,0.8)"
           returnKeyType="next"
           autoCorrect={false}
-          onChangeText={(username) => this.setState({ username })}
-          value={this.state.username}
+          onChangeText={(email) => this.setState({ email: email })}
         />
         <TextInput
-          style={input}
           placeholder="Password"
+          style={styles.input}
           placeholderTextColor="rgba(255,255,255,0.8)"
           returnKeyType="go"
-          secureTextEntry={true}
           autoCorrect={false}
-          ref={"txtPassword"}
-          onChangeText={(password) => this.setState({ password })}
-          value={this.state.password}
-        /> */}
+          secureTextEntry="true"
+          onChangeText={(password) => this.setState({ password: password })}
+        />
         <TouchableOpacity
           style={buttonContainer}
-          onPress={() => this.props.navigation.navigate("Menu")}
+          onPress={() => this.SignInHandler(this)}
         >
           <Text style={buttonText}>SIGN IN NOW </Text>
         </TouchableOpacity>
@@ -82,69 +138,51 @@ export default class Auth extends Component {
 
     const SignUpJSX = (
       <View style={infoContainer}>
-        <AuthInput placeholder="Enter your username" returnKeyType="next" />
-        <AuthInput placeholder="Enter your email" returnKeyType="next" />
-        <AuthInput
-          placeholder="Enter your password"
+        <TextInput
+          placeholder="Enter your email address"
+          style={styles.input}
+          placeholderTextColor="rgba(255,255,255,0.8)"
           returnKeyType="next"
-          isPassword
+          autoCorrect={false}
+          onChangeText={(email) => this.setState({ email: email })}
         />
-        <AuthInput
-          placeholder="Re-enter your password"
-          returnKeyType="go"
-          isPassword
-        />
-        {/* <TextInput
-          style={input}
+        <TextInput
           placeholder="Enter your username"
+          style={styles.input}
           placeholderTextColor="rgba(255,255,255,0.8)"
           returnKeyType="next"
           autoCorrect={false}
-          onSubmitEditing={() => this.refs.txtEmail.focus()}
-          onChangeText={(username) => this.setState({ username })}
-          value={this.state.username}
+          onChangeText={(username) => this.setState({ username: username })}
         />
         <TextInput
-          style={input}
-          placeholder="Enter your Email"
-          placeholderTextColor="rgba(255,255,255,0.8)"
-          returnKeyType="next"
-          autoCorrect={false}
-          ref={"txtEmail"}
-          onSubmitEditing={() => this.refs.txtPassword.focus()}
-          onChangeText={(email) => this.setState({ email })}
-          value={this.state.email}
-        />
-        <TextInput
-          style={input}
           placeholder="Enter your password"
+          style={styles.input}
           placeholderTextColor="rgba(255,255,255,0.8)"
           returnKeyType="next"
-          secureTextEntry
           autoCorrect={false}
-          ref={"txtPassword"}
-          onSubmitEditing={() => this.refs.txtRePassword.focus()}
-          onChangeText={(password) => this.setState({ password })}
-          value={this.state.password}
+          secureTextEntry="true"
+          onChangeText={(password) => this.setState({ password: password })}
         />
-
         <TextInput
-          style={input}
           placeholder="Re-enter your password"
+          style={styles.input}
           placeholderTextColor="rgba(255,255,255,0.8)"
-          returnKeyType="go"
-          secureTextEntry
+          returnKeyType="next"
           autoCorrect={false}
-          ref={"txtRePassword"}
-          onChangeText={(rePassword) => this.setState({ rePassword })}
-          value={this.state.rePassword}
-        /> */}
-        <TouchableOpacity style={buttonContainer}>
+          secureTextEntry="true"
+          onChangeText={(rePassword) =>
+            this.setState({ rePassword: rePassword })
+          }
+        />
+        <TouchableOpacity
+          style={buttonContainer}
+          onPress={this.SignUpHandler.bind(this)}
+        >
           <Text style={buttonText}>SIGN UP NOW </Text>
         </TouchableOpacity>
       </View>
     );
-    const { isSignIn } = this.state;
+
     const mainJSX = isSignIn ? SignInJSX : SignUpJSX;
 
     return (
