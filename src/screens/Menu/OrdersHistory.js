@@ -11,6 +11,10 @@ import {
 import backSpecial from "../../../assets/icons/blackback.png";
 
 export default class OrderHistory extends Component {
+  goBackToMain() {
+    const { navigation } = this.props;
+    navigation.goBack();
+}
   render() {
     const {
       wrapper,
@@ -24,7 +28,7 @@ export default class OrderHistory extends Component {
       <View style={wrapper}>
         <View style={header}>
           <View />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.goBackToMain.bind(this)}>
             <Image source={backSpecial} style={backIconStyle} />
           </TouchableOpacity>
           <View

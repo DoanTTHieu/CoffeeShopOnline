@@ -45,7 +45,7 @@ export default class Swiper extends React.Component {
           this.scrollRef.current.scrollTo({
             animated: true,
             y: 0,
-            x: width * 0.85 * this.state.selectedIndex,
+            x: width * 0.95 * this.state.selectedIndex,
           });
         }
       );
@@ -92,11 +92,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   scrollView: {
-    width: width * 0.85,
+    width: width*0.95,
     height: height * 0.3,
   },
   image: {
-    width: width * 0.85,
+    width: width*0.95,
     height: height * 0.3,
     borderRadius: 5,
   },

@@ -6,14 +6,14 @@ import { NavigationContainer } from "@react-navigation/native";
 // import Auth from "./src/screens/Auth/Auth";
 
 import LoginNavigator from "./src/navigation/LoginHomeNavigator";
-
+//import DetailScreen from "./src/screens/Main/Products/ProductDetail";
 StatusBar.setHidden(true);
 
 export default class App extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        {/* <MenuNavigator /> */}
+        {/* <DetailScreen /> */}
         <LoginNavigator />
       </NavigationContainer>
       // <Auth />

@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import sp1 from "../../../../assets/items/capuchino.jpg";
+import Header from "../../../components/Header";
 
 function toTitleCase(str) {
   return str.replace(
@@ -48,6 +49,7 @@ export default class OrdersView extends Component {
     } = styles;
     return (
       <View style={wrapper}>
+        <Header navigation={this.props.navigation}/>
         <ScrollView style={main}>
           {this.state.ordersArray.map((e) => (
             <View style={product}>

@@ -49,7 +49,9 @@ export default class ProductDetail extends Component {
             <TouchableOpacity onPress={this.goBack.bind(this)}>
               <Image style={backStyle} source={back} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.addThisProduct.bind(this)}>
+            <TouchableOpacity 
+            //onPress={this.addThisProduct.bind(this)}
+            >
               <Image style={cartStyle} source={cart} />
             </TouchableOpacity>
           </View>
@@ -88,7 +90,7 @@ export default class ProductDetail extends Component {
 }
 
 const { width } = Dimensions.get("window");
-const swiperWidth = width / 1.8 - 30;
+const swiperWidth = width / 1.5 - 30;
 const swiperHeight = (swiperWidth * 452) / 361;
 
 const styles = StyleSheet.create({
@@ -130,6 +132,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     marginHorizontal: 10,
+    //backgroundColor: "blue"
   },
   textMain: {
     paddingLeft: 20,
@@ -142,12 +145,12 @@ const styles = StyleSheet.create({
     color: "#3F3F46",
   },
   textSmoke: {
-    fontFamily: "Avenir",
+    //fontFamily: "Avenir",
     fontSize: 20,
     color: "#9A9A9A",
   },
   textHighlight: {
-    fontFamily: "Avenir",
+    //fontFamily: "Avenir",
     fontSize: 20,
     color: "#7D59C8",
   },

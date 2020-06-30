@@ -189,7 +189,7 @@ export default class Auth extends Component {
       <View style={container}>
         <View style={header}>
           <TouchableOpacity>
-            <Image source={back} style={iconStyle} />
+            <Image source={back} style={iconStyle} onPress={()=>this.props.navigation.goBack()}/>
           </TouchableOpacity>
           <Text style={titleStyle}>BACK</Text>
           <Image source={cup} style={iconStyle} />
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 40,
+    //marginTop: 20,
   },
   titleStyle: {
     color: "#f7c744",
