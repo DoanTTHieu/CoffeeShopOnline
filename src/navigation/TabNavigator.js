@@ -1,21 +1,11 @@
 import React, { Component } from "react";
-import {
-  View,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
+import {View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
 import ContactScreen from "../screens/Main/Contact/Contact";
 import OrdersScreen from "./OrdersNavigator";
 import ProductsScreen from "./ProductNavigator";
-import menu from "../../assets/icons/menu.png";
-
-const { height, width } = Dimensions.get("window");
 
 const Tab = createBottomTabNavigator();
 export default class TabNavigator extends Component {
@@ -28,17 +18,6 @@ export default class TabNavigator extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.container}>
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.openDrawer();
-            }}
-          >
-            <Image source={menu} style={{ width: 30, height: 30 }} />
-          </TouchableOpacity>
-          <TextInput style={styles.searchBox} placeholder="SEARCH" />
-        </View>
-
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
@@ -67,20 +46,3 @@ export default class TabNavigator extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: height / 10,
-    backgroundColor: "#f7c744",
-    flexDirection: "row",
-    padding: 10,
-    paddingTop: "8%",
-    justifyContent: "space-around",
-  },
-  searchBox: {
-    height: height / 25,
-    width: width * 0.8,
-    backgroundColor: "#FFF",
-    paddingLeft: 10,
-  },
-});
