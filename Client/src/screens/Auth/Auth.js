@@ -15,7 +15,7 @@ import cup from "../../../assets/icons/cup.png";
 
 import AuthInput from "../../components/AuthInput";
 
-const localhost = "192.168.218.106";
+const localhost = "10.50.208.4";
 export default class Auth extends Component {
   constructor(props) {
     super(props);
@@ -189,7 +189,11 @@ export default class Auth extends Component {
       <View style={container}>
         <View style={header}>
           <TouchableOpacity>
-            <Image source={back} style={iconStyle} onPress={()=>this.props.navigation.goBack()}/>
+            <Image
+              source={back}
+              style={iconStyle}
+              onPress={() => this.props.navigation.goBack()}
+            />
           </TouchableOpacity>
           <Text style={titleStyle}>BACK</Text>
           <Image source={cup} style={iconStyle} />

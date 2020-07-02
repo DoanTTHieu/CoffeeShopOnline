@@ -1,4 +1,6 @@
-node_modules/**/*
+Client/node_modules/**/*
+Server/node_modules/**/*
+Client/.expo/web/cache
 .expo/*
 npm-debug.*
 *.jks

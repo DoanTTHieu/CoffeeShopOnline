@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FlatList } from "react-native";
 import Item from "./Item";
 
-const localhost = "192.168.218.106"; //đổi localhost thành địa chỉ IPV4 của máy mình
+const localhost = "10.50.208.4"; //đổi localhost thành địa chỉ IPV4 của máy mình
 export default class Items extends Component {
   constructor(props) {
     super(props);
