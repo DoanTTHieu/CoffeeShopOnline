@@ -124,7 +124,7 @@ module.exports.updateProduct = function (req, res, next) {
 };
 
 module.exports.deleteProductById = function (req, res, next) {
-  const deletedProductId = req.body.id;
+  const deletedProductId = req.params.id;
   Product.findOne({
     where: { id: deletedProductId },
   })

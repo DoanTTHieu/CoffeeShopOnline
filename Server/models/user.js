@@ -4,6 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     tableName: "User",
     comment: "",
     indexes: [],
+    timestamps: true,
+    paranoid: true,
   };
   const User = sequelize.define(
     "User",
