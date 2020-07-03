@@ -7,9 +7,10 @@ module.exports = {
       [
         {
           title: "Cappuccino",
-          stock: 2,
+          available: true,
           description: "Amazing",
           type: "Coffee",
+          price: 30000,
           imageUrl:
             "https://upload.wikimedia.org/wikipedia/commons/c/c8/Cappuccino_at_Sightglass_Coffee.jpg",
           createdAt: new Date(),
@@ -17,9 +18,10 @@ module.exports = {
         },
         {
           title: "Cookie",
-          stock: 3,
+          available: false,
           description: "Wonderful",
           type: "coffee",
+          price: 35000,
           imageUrl:
             "https://www.simplystacie.net/wp-content/uploads/2016/06/choc-chip-cookie-coffee-4-1.jpg",
           createdAt: new Date(),
@@ -27,9 +29,10 @@ module.exports = {
         },
         {
           title: "Oreo",
-          stock: 3,
+          available: true,
           description: "Wonderful",
           type: "coffee",
+          price: 38000,
           imageUrl:
             "https://img.food.boxspace.in/image/rbk_5bc71622d61e4/xhdpi.jpg",
           createdAt: new Date(),

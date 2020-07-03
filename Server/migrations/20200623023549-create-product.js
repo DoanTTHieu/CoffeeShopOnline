@@ -12,8 +12,8 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      stock: {
-        type: Sequelize.INTEGER,
+      available: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       description: {
@@ -22,6 +22,10 @@ module.exports = {
       },
       type: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      price: {
+        type: Sequelize.DOUBLE,
         allowNull: false,
       },
       imageUrl: {

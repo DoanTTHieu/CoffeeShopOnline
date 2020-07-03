@@ -18,8 +18,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      stock: {
-        type: DataTypes.INTEGER,
+      available: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      type: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       description: {
@@ -30,11 +34,20 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      price: {
+        type: DataTypes.DOUBLE,
+        allowNull: false,
+      },
     },
     options
   );
   Product.associate = function (models) {
-    // associations can be defined here
+    Product.belongsToMany(models.Order, {
+      through: "OrderDetail",
+      as: "Orders",
+      foreignKey: "productId",
+      otherKey: "orderId",
+    });
   };
   return Product;
 };
