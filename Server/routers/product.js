@@ -16,6 +16,8 @@ router.put("/update", ProductController.updateProduct);
 
 router.delete("/delete/:id", ProductController.deleteProductById);
 
+router.get("/:id", ProductController.getAProduct);
+
 router.get("/available", ProductController.getAvailableProducts);
 
 router.post("/filter", ProductController.filterByPrice);

@@ -119,6 +119,8 @@ module.exports.deleteOrder = function (req, res) {
     });
 };
 
+module.exports.getAnOrder = function (req, res) {};
+
 module.exports.getMaxIDOrder = function (req, res) {
   // ????
 };

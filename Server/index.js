@@ -22,5 +22,8 @@ app.use((req, res, next) => {
 app.use("/product", productRouter);
 app.use("/auth", authRouter);
 app.use("/order", orderRouter);
+app.use((req, res, next) => {
+  res.status(404).json("Not Found!!!");
+});
 
 app.listen(3001);

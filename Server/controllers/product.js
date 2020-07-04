@@ -143,6 +143,22 @@ module.exports.deleteProductById = function (req, res, next) {
     });
 };
 
+module.exports.getAProduct = function (req, res, next) {
+  Product.findOne({
+    where: { id: req.params.id },
+  })
+    .then((product) => {
+      if (product) {
+        res.status(200).json(product);
+      }
+      next();
+    })
+    .catch((err) => {
+      if (!err.status) statusCode = 500;
+      next(err);
+    });
+};
+
 module.exports.getAvailableProducts = (req, res, next) => {
   Product.findAll({
     where: {
