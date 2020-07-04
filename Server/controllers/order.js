@@ -9,14 +9,20 @@ const Op = sequelize.Op;
 // Total
 module.exports.getOrders = function (req, res) {
   Order.findAll()
-    .then((orders) => res.status(200).send(orders))
-    .catch((error) => res.status(400).send(error.message));
+    .then((orders) => res.status(200).json(orders))
+    .catch((err) => {
+      if (!err.status) err.statusCode = 500;
+      next(err);
+    });
 };
 
 module.exports.getTotalOrders = function (req, res) {
   Order.count()
-    .then((total) => res.status(200).send(total.toString()))
-    .catch((error) => res.sendStatus(400).send(error.message));
+    .then((total) => res.status(200).json(total.toString()))
+    .catch((err) => {
+      if (!err.status) err.statusCode = 500;
+      next(err);
+    });
 };
 
 module.exports.getTotalOrdersInPeriod = function (req, res) {
@@ -27,8 +33,11 @@ module.exports.getTotalOrdersInPeriod = function (req, res) {
       [Op.between]: [dateFrom, dateTo],
     },
   })
-    .then((total) => res.status(200).send(total.toString()))
-    .catch((error) => res.sendStatus(400).send(error.message));
+    .then((total) => res.status(200).json(total.toString()))
+    .catch((err) => {
+      if (!err.status) err.statusCode = 500;
+      next(err);
+    });
 };
 
 module.exports.getTotalOrdersThisMonth = function (req, res) {
@@ -47,7 +56,10 @@ module.exports.getTotalOrdersThisMonth = function (req, res) {
     },
   })
     .then((total) => res.status(200).send(total.toString()))
-    .catch((error) => res.sendStatus(400).send(error.message));
+    .catch((err) => {
+      if (!err.status) err.statusCode = 500;
+      next(err);
+    });
 };
 
 module.exports.getTotalOrdersThisYear = function (req, res) {
@@ -61,7 +73,10 @@ module.exports.getTotalOrdersThisYear = function (req, res) {
     },
   })
     .then((total) => res.status(200).send(total.toString()))
-    .catch((error) => res.sendStatus(400).send(error.message));
+    .catch((err) => {
+      if (!err.status) err.statusCode = 500;
+      next(err);
+    });
 };
 // Search & Filter
 module.exports.searchOrder = function (req, res) {};
@@ -93,7 +108,10 @@ module.exports.addOrder = function (req, res) {
       });
       return res.status(200).json(order);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      if (!err.status) err.statusCode = 500;
+      next(err);
+    });
 };
 
 module.exports.updateOrder = function (req, res) {};
@@ -115,11 +133,28 @@ module.exports.deleteOrder = function (req, res) {
       });
     })
     .catch((err) => {
-      console.log(err.message);
+      if (!err.status) {
+        err.statusCode = 500;
+      }
+      next(err);
     });
 };
 
-module.exports.getAnOrder = function (req, res) {};
+module.exports.getAnOrder = function (req, res) {
+  Order.findOne({
+    where: { id: req.params.id },
+  })
+    .then((order) => {
+      if (order) {
+        res.status(200).json(order);
+      }
+      next();
+    })
+    .catch((err) => {
+      if (!err.status) statusCode = 500;
+      next(err);
+    });
+};
 
 module.exports.getMaxIDOrder = function (req, res) {
   // ????

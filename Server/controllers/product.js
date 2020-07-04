@@ -73,6 +73,7 @@ module.exports.addProduct = function (req, res, next) {
       Product.create({
         title: req.body.title,
         available: req.body.available,
+        price: req.body.price,
         description: req.body.description,
         type: req.body.type,
         imageUrl: req.body.imageUrl,
