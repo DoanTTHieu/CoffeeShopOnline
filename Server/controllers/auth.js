@@ -14,7 +14,6 @@ exports.signup = (req, res, next) => {
     throw error;
   }
 
-  const email = req.body.email;
   const username = req.body.username;
   const password = req.body.password;
 
@@ -22,7 +21,6 @@ exports.signup = (req, res, next) => {
     .hash(password, 12)
     .then((hashedPw) => {
       const user = new User({
-        email: email,
         password: hashedPw,
         username: username,
       });
@@ -41,15 +39,15 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  const email = req.body.email;
+  const username = req.body.username;
   const password = req.body.password;
   let loadedUser;
 
-  User.findOne({ where: { email: email } })
+  User.findOne({ where: { username: username } })
     .then((user) => {
-      //verify email
+      //verify username
       if (!user) {
-        const err = new Error("This email can not be found!");
+        const err = new Error("This username can not be found!");
         err.statusCode = 401;
         throw err;
       }
@@ -66,7 +64,7 @@ exports.login = (req, res, next) => {
       //use token
       const token = jwt.sign(
         {
-          email: loadedUser.email,
+          username: loadedUser.username,
           userId: loadedUser.id.toString(),
         },
         "supersecretsecret",
