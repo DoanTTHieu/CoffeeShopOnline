@@ -87,7 +87,7 @@ module.exports.addOrder = function (req, res) {
   const savedOrder = Order.create({
     userId: req.body.userId,
     status: 0,
-    discount: 0.2,
+    discount: req.body.discount,
     orderDate: new Date(),
   })
     .then((order) => {

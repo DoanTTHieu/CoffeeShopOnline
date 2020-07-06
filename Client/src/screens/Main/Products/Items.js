@@ -1,40 +1,34 @@
-import React, { Component } from "react";
-import { FlatList, View, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { FlatList, View } from "react-native";
 import Item from "./Item";
+import { ipv4, port } from "../../../constant/constant";
 
-const localhost = "192.168.39.237"; //đổi localhost thành địa chỉ IPV4 của máy mình
-export default class Items extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dataSource: [],
-    };
-  }
+const Items = (props) => {
+  const [dataSource, setDataSource] = useState([]);
 
-  componentDidMount() {
-    const url = "http://" + localhost + ":3001/product";
+  useEffect(() => {
+    const url = `http://${ipv4}:${port}/product`;
     fetch(url)
       .then((res) => res.json())
       .then((resData) => {
-        this.setState({ dataSource: resData });
+        setDataSource(resData);
       })
       .catch((err) => console.log(err));
-  }
-  render() {
+  }, []);
 
-    const { navigation } = this.props;
-    return (
-      <View style={{flex: 1}}>
-        <FlatList
-          data={this.state.dataSource}
-          renderItem={({ item }) =>
-            <Item category={item}
-            // onPress={() => navigation.navigate('ProductDetail', {
-            //     product: item
-            />
-          }
-        />
+  // const a = () => {
+  //   const b = [...dataSource];
+  //   setDataSource(b);
+  // };
 
-      </View>);
-  }
-}
+  return (
+    <View style={{ flex: 1 }}>
+      <FlatList
+        data={dataSource}
+        renderItem={({ item }) => <Item category={item} />}
+      />
+    </View>
+  );
+};
+
+export default Items;

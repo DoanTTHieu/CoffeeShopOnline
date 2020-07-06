@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TouchableOpacity,
@@ -6,385 +6,70 @@ import {
   Image,
   StyleSheet,
   Dimensions,
-  ScrollView,
+  FlatList,
 } from "react-native";
 import backSpecial from "../../../assets/icons/blackback.png";
+import * as Animatable from "react-native-animatable";
 
-export default class OrderHistory extends Component {
-  goBackToMain() {
-    const { navigation } = this.props;
-    navigation.goBack();
-}
-  render() {
-    const {
-      wrapper,
-      header,
-      headerTitle,
-      backIconStyle,
-      body,
-      orderRow,
-    } = styles;
-    return (
-      <View style={wrapper}>
-        <View style={header}>
-          <View />
-          <TouchableOpacity onPress={this.goBackToMain.bind(this)}>
-            <Image source={backSpecial} style={backIconStyle} />
-          </TouchableOpacity>
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <Text style={headerTitle}>Order History</Text>
-          </View>
-        </View>
-        <View style={body}>
-          <ScrollView>
-            <View style={orderRow}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Order id:
-                </Text>
-                <Text style={{ color: "#203546" }}>ORD001</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  OrderTime:
-                </Text>
-                <Text style={{ color: "#C21C70" }}>2017-04-19 08:30:08</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Status:
-                </Text>
-                <Text style={{ color: "#203546" }}>Pending</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Total:
-                </Text>
-                <Text style={{ color: "#C21C70", fontWeight: "bold" }}>
-                  100$
-                </Text>
-              </View>
-            </View>
-            <View style={orderRow}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Order id:
-                </Text>
-                <Text style={{ color: "#203546" }}>ORD001</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  OrderTime:
-                </Text>
-                <Text style={{ color: "#C21C70" }}>2017-04-19 08:30:08</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Status:
-                </Text>
-                <Text style={{ color: "#203546" }}>Pending</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Total:
-                </Text>
-                <Text style={{ color: "#C21C70", fontWeight: "bold" }}>
-                  100$
-                </Text>
-              </View>
-            </View>
+import Order from "../../components/Order";
+import { ipv4, port } from "../../constant/constant";
 
-            <View style={orderRow}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Order id:
-                </Text>
-                <Text style={{ color: "#203546" }}>ORD001</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  OrderTime:
-                </Text>
-                <Text style={{ color: "#C21C70" }}>2017-04-19 08:30:08</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Status:
-                </Text>
-                <Text style={{ color: "#203546" }}>Pending</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Total:
-                </Text>
-                <Text style={{ color: "#C21C70", fontWeight: "bold" }}>
-                  100$
-                </Text>
-              </View>
-            </View>
+const OrderHistory = (props) => {
+  const [dataSource, setDataSource] = useState([]);
 
-            <View style={orderRow}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Order id:
-                </Text>
-                <Text style={{ color: "#203546" }}>ORD001</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  OrderTime:
-                </Text>
-                <Text style={{ color: "#C21C70" }}>2017-04-19 08:30:08</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Status:
-                </Text>
-                <Text style={{ color: "#203546" }}>Pending</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Total:
-                </Text>
-                <Text style={{ color: "#C21C70", fontWeight: "bold" }}>
-                  100$
-                </Text>
-              </View>
-            </View>
+  const goBackToMain = () => {
+    props.navigation.goBack();
+  };
 
-            <View style={orderRow}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Order id:
-                </Text>
-                <Text style={{ color: "#203546" }}>ORD001</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  OrderTime:
-                </Text>
-                <Text style={{ color: "#C21C70" }}>2017-04-19 08:30:08</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Status:
-                </Text>
-                <Text style={{ color: "#203546" }}>Pending</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Total:
-                </Text>
-                <Text style={{ color: "#C21C70", fontWeight: "bold" }}>
-                  100$
-                </Text>
-              </View>
-            </View>
+  useEffect(() => {
+    const url = `http://${ipv4}:${port}/order`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((resData) => {
+        setDataSource(resData);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-            <View style={orderRow}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Order id:
-                </Text>
-                <Text style={{ color: "#203546" }}>ORD001</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  OrderTime:
-                </Text>
-                <Text style={{ color: "#C21C70" }}>2017-04-19 08:30:08</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Status:
-                </Text>
-                <Text style={{ color: "#203546" }}>Pending</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Total:
-                </Text>
-                <Text style={{ color: "#C21C70", fontWeight: "bold" }}>
-                  100$
-                </Text>
-              </View>
-            </View>
-            <View style={orderRow}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Order id:
-                </Text>
-                <Text style={{ color: "#203546" }}>ORD001</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  OrderTime:
-                </Text>
-                <Text style={{ color: "#C21C70" }}>2017-04-19 08:30:08</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Status:
-                </Text>
-                <Text style={{ color: "#203546" }}>Pending</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={{ color: "#9A9A9A", fontWeight: "bold" }}>
-                  Total:
-                </Text>
-                <Text style={{ color: "#C21C70", fontWeight: "bold" }}>
-                  100$
-                </Text>
-              </View>
-            </View>
-          </ScrollView>
+  const {
+    wrapper,
+    header,
+    headerTitle,
+    backIconStyle,
+    body,
+    orderRow,
+  } = styles;
+
+  return (
+    <Animatable.View style={wrapper} animation="fadeInRight">
+      <View style={header}>
+        <View />
+        <TouchableOpacity onPress={goBackToMain}>
+          <Image source={backSpecial} style={backIconStyle} />
+        </TouchableOpacity>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Text style={headerTitle}>Order History</Text>
         </View>
       </View>
-    );
-  }
-}
+      <View style={body}>
+        <FlatList
+          data={dataSource}
+          renderItem={({ item }) => (
+            <Order
+              id={item.id}
+              orderDate={item.orderDate}
+              discount={item.discount}
+              status={item.status}
+              userId={item.userId}
+            ></Order>
+          )}
+        />
+      </View>
+    </Animatable.View>
+  );
+};
 
 const { width } = Dimensions.get("window");
 
@@ -402,15 +87,6 @@ const styles = StyleSheet.create({
   //headerTitle: { fontFamily: 'Avenir', color: '#203546', fontSize: 20 },
   backIconStyle: { width: 30, height: 30 },
   body: { flex: 10, backgroundColor: "#F6F6F6" },
-  orderRow: {
-    height: width / 3,
-    backgroundColor: "#FFF",
-    margin: 10,
-    shadowOffset: { width: 2, height: 2 },
-    shadowColor: "#DFDFDF",
-    shadowOpacity: 0.2,
-    padding: 10,
-    borderRadius: 2,
-    justifyContent: "space-around",
-  },
 });
+
+export default OrderHistory;
