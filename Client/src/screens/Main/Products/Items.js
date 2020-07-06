@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { FlatList } from "react-native";
+import { FlatList, View, ScrollView } from "react-native";
 import Item from "./Item";
 
-const localhost = "10.50.208.4"; //đổi localhost thành địa chỉ IPV4 của máy mình
+const localhost = "192.168.39.237"; //đổi localhost thành địa chỉ IPV4 của máy mình
 export default class Items extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      dataSource: [],
     };
   }
 
@@ -16,33 +16,25 @@ export default class Items extends Component {
     fetch(url)
       .then((res) => res.json())
       .then((resData) => {
-        this.setState({ data: resData });
+        this.setState({ dataSource: resData });
       })
       .catch((err) => console.log(err));
   }
-
   render() {
-    // const { navigation } = this.props;
-    // const data = [
-    //   { id: 1, name: "Product1 ", price: 20 },
-    //   { id: 2, name: "Product2 ", price: 30 },
-    //   { id: 3, name: "Product3 ", price: 40 },
-    // ];
+
+    const { navigation } = this.props;
     return (
-      <FlatList
-        data={this.state.data}
-        renderItem={({ item }) => (
-          <Item
-            title={item.title}
-            stock={item.stock}
-            imageUrl={item.imageUrl}
+      <View style={{flex: 1}}>
+        <FlatList
+          data={this.state.dataSource}
+          renderItem={({ item }) =>
+            <Item category={item}
             // onPress={() => navigation.navigate('ProductDetail', {
             //     product: item
-            // })}
-          />
-        )}
-        style={{ width: "95%" }}
-      />
-    );
+            />
+          }
+        />
+
+      </View>);
   }
 }
