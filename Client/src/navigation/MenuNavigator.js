@@ -1,63 +1,62 @@
-import React, { Component } from "react";
-import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-
-import OrdersHistory from "../screens/Menu/OrdersHistory";
-import account from "../../assets/icons/account.png";
-import TabNavigator from "./TabNavigator";
-import Auth from "../navigation/AuthNavigation";
+import React, { Component } from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Animatable from "react-native-animatable";
+import { useSelector } from "react-redux";
+import account from "../../assets/icons/account.png";
+import OrdersHistory from "../screens/Menu/OrdersHistory";
+import TabNavigator from "./TabNavigator";
 
-class CustomDrawerContent extends Component {
-  render() {
-    const {
-      container,
-      profile,
-      btnStyle,
-      btnText,
-      logInContainer,
-      txtUsername,
-    } = styles;
-    const logOutJSX = (
-      <View style={{ flex: 1 }}>
-        <TouchableOpacity
-          style={btnStyle}
-          onPress={() => this.props.navigation.navigate("Auth")}
-        >
-          <Text style={btnText}>Sign in</Text>
-        </TouchableOpacity>
-      </View>
-    );
-    const logInJSX = (
-      <View style={logInContainer}>
-        <Text style={txtUsername}>USERNAME</Text>
-        <DrawerContentScrollView {...this.props}>
-          <DrawerItemList {...this.props} labelStyle={{ fontSize: 18 }} />
-          <DrawerItem
-            label="Sign out"
-            labelStyle={{ fontSize: 18 }}
-            onPress={() => {
-              this.props.navigation.navigate("Auth");
-            }}
-          />
-        </DrawerContentScrollView>
-      </View>
-    );
+const CustomDrawerContent = (props) => {
+  const {
+    container,
+    profile,
+    btnStyle,
+    btnText,
+    logInContainer,
+    txtUsername,
+  } = styles;
+  const logOutJSX = (
+    <View style={{ flex: 1 }}>
+      <TouchableOpacity
+        style={btnStyle}
+        onPress={() => props.navigation.navigate("Auth")}
+      >
+        <Text style={btnText}>Sign in</Text>
+      </TouchableOpacity>
+    </View>
+  );
+  const logInJSX = (
+    <View style={logInContainer}>
+      <Text style={txtUsername}>
+        {useSelector((state) => state.users.username.toString())}
+      </Text>
+      <DrawerContentScrollView {...props}>
+        <DrawerItemList {...props} labelStyle={{ fontSize: 18 }} />
+        <DrawerItem
+          label="Sign out"
+          labelStyle={{ fontSize: 18 }}
+          onPress={() => {
+            props.navigation.navigate("Auth");
+          }}
+        />
+      </DrawerContentScrollView>
+    </View>
+  );
 
-    const mainJSXView = this.props.getLoginState ? logInJSX : logOutJSX;
-    return (
-      <View style={container}>
-        <Image source={account} style={profile} />
-        {mainJSXView}
-      </View>
-    );
-  }
-}
+  const mainJSXView = props.getLoginState ? logInJSX : logOutJSX;
+  return (
+    <View style={container}>
+      <Image source={account} style={profile} />
+      {mainJSXView}
+    </View>
+  );
+};
 
 const Drawer = createDrawerNavigator();
 
@@ -76,11 +75,15 @@ export default class MenuDrawer extends Component {
       <Drawer.Screen name="Orders History" component={OrdersHistory} />
     );
 
-    const logedOut = <Drawer.Screen name="Auth" component={Auth} />;
+    // const logedOut = <Drawer.Screen name="Auth" component={Auth} />;
     const mainJSX = this.state.isLoggedIn ? loggedIn : loggedOut;
 
     return (
-      <View style={{ flex: 1 }} animation="fadeInUpBig" duration={2000}>
+      <Animatable.View
+        style={{ flex: 1 }}
+        animation="fadeInUpBig"
+        duration={2000}
+      >
         <Drawer.Navigator
           drawerContent={(props) => (
             <CustomDrawerContent
@@ -97,7 +100,7 @@ export default class MenuDrawer extends Component {
           <Drawer.Screen name="Home" component={TabNavigator} />
           {mainJSX}
         </Drawer.Navigator>
-      </View>
+      </Animatable.View>
     );
   }
 }

@@ -1,22 +1,28 @@
 import React from "react";
 import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-
-// import MenuNavigator from "./src/navigation/MenuNavigator";
-// import Auth from "./src/screens/Auth/Auth";
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
 
 import LoginNavigator from "./src/navigation/LoginHomeNavigator";
-//import DetailScreen from "./src/screens/Main/Products/ProductDetail";
+import usersReducer from "./src/store/reducers/users";
+
 StatusBar.setHidden(true);
 
-export default class App extends React.Component {
-  render() {
-    return (
+const rootReducer = combineReducers({
+  users: usersReducer,
+});
+
+const store = createStore(rootReducer);
+
+const App = () => {
+  return (
+    <Provider store={store}>
       <NavigationContainer>
-        {/* <DetailScreen /> */}
         <LoginNavigator />
       </NavigationContainer>
-      // <Auth />
-    );
-  }
-}
+    </Provider>
+  );
+};
+
+export default App;

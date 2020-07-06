@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   View,
   Text,
@@ -7,9 +7,12 @@ import {
   TextInput,
   Alert,
 } from "react-native";
+import { useDispatch } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import * as Animatable from "react-native-animatable";
+
+import { changeUser } from "../../store/actions/users";
 
 const localhost = "192.168.56.1";
 
@@ -28,6 +31,12 @@ const SignInScreen = (props) => {
   const [triggerSignIn, setTriggerSignIn] = useState(false);
 
   // const [unauthorized, setUnauthorized] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const getUserHandler = useCallback(() => {
+    dispatch(changeUser(data.username));
+  }, [dispatch, data.username]);
 
   const handleUsernameChange = (val) => {
     if (!data.isValidUser) data.isValidUser = true;
@@ -74,6 +83,10 @@ const SignInScreen = (props) => {
     });
   };
 
+  const handleSignIn = () => {
+    setTriggerSignIn(!triggerSignIn);
+  };
+
   useEffect(() => {
     if (isFirstRun.current) {
       isFirstRun.current = false;
@@ -97,16 +110,15 @@ const SignInScreen = (props) => {
         setData({ ...data });
         return res.json();
       })
-      .then((result) => {
+      .then(() => {
+        getUserHandler();
+      })
+      .then(() => {
         props.navigation.navigate("SuccessfulValidation");
       })
-      .then((result) => resetState())
+      .then(() => resetState())
       .catch((err) => console.log("Error"));
   }, [triggerSignIn]);
-
-  const handleSignIn = () => {
-    setTriggerSignIn(!triggerSignIn);
-  };
 
   return (
     <View style={styles.container}>
