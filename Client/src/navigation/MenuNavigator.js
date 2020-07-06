@@ -10,7 +10,9 @@ import {
 import OrdersHistory from "../screens/Menu/OrdersHistory";
 import account from "../../assets/icons/account.png";
 import TabNavigator from "./TabNavigator";
-import Auth from "../screens/Auth/Auth";
+import Auth from "../navigation/AuthNavigation";
+import * as Animatable from "react-native-animatable";
+
 class CustomDrawerContent extends Component {
   render() {
     const {
@@ -78,7 +80,7 @@ export default class MenuDrawer extends Component {
     const mainJSX = this.state.isLoggedIn ? loggedIn : loggedOut;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }} animation="fadeInUpBig" duration={2000}>
         <Drawer.Navigator
           drawerContent={(props) => (
             <CustomDrawerContent

@@ -1,7 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Auth from "../screens/Auth/Auth";
+import Auth from "../navigation/AuthNavigation";
 import Menu from "../navigation/MenuNavigator";
+import SuccessfulValidation from "../screens/Auth/SuccessfulValidationScreen";
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,11 @@ export default class LoginHomeNavigator extends React.Component {
         <Stack.Screen
           name="Auth"
           component={Auth}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SuccessfulValidation"
+          component={SuccessfulValidation}
           options={{ headerShown: false }}
         />
         <Stack.Screen

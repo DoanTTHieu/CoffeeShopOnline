@@ -9,6 +9,7 @@ exports.signup = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = new Error("Validation failed =))!");
+
     error.statusCode = 422;
     error.data = errors.array();
     throw error;
@@ -58,7 +59,7 @@ exports.login = (req, res, next) => {
       //verify password
       if (!isEqual) {
         const err = new Error("Wrong password!");
-        err.statusCode = 401;
+        err.statusCode = 402;
         throw err;
       }
       //use token
