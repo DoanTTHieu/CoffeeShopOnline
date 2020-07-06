@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     height: height * 0.3 + imageBorder * 2,
   },
   item: {
-    width: width * 0.85 + imageBorder * 2,
+    //width: width * 0.85 + imageBorder * 2,
+    flex: 1
   },
 });
