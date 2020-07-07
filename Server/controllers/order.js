@@ -7,7 +7,7 @@ const OrderDetail = db.OrderDetail;
 const Op = sequelize.Op;
 
 // Total
-module.exports.getOrders = function (req, res) {
+module.exports.getOrders = function (req, res, next) {
   Order.findAll()
     .then((orders) => res.status(200).json(orders))
     .catch((err) => {
@@ -16,7 +16,7 @@ module.exports.getOrders = function (req, res) {
     });
 };
 
-module.exports.getTotalOrders = function (req, res) {
+module.exports.getTotalOrders = function (req, res, next) {
   Order.count()
     .then((total) => res.status(200).json(total.toString()))
     .catch((err) => {
@@ -25,7 +25,7 @@ module.exports.getTotalOrders = function (req, res) {
     });
 };
 
-module.exports.getTotalOrdersInPeriod = function (req, res) {
+module.exports.getTotalOrdersInPeriod = function (req, res, next) {
   const dateFrom = req.body.dateFrom;
   const dateTo = req.body.dateTo;
   Order.count({
@@ -40,7 +40,7 @@ module.exports.getTotalOrdersInPeriod = function (req, res) {
     });
 };
 
-module.exports.getTotalOrdersThisMonth = function (req, res) {
+module.exports.getTotalOrdersThisMonth = function (req, res, next) {
   const month = req.body.month;
   const year = req.body.year;
   Order.count({
@@ -62,7 +62,7 @@ module.exports.getTotalOrdersThisMonth = function (req, res) {
     });
 };
 
-module.exports.getTotalOrdersThisYear = function (req, res) {
+module.exports.getTotalOrdersThisYear = function (req, res, next) {
   const year = req.body.year;
   Order.count({
     where: {
@@ -79,15 +79,13 @@ module.exports.getTotalOrdersThisYear = function (req, res) {
     });
 };
 // Search & Filter
-module.exports.searchOrder = function (req, res) {};
+module.exports.searchOrder = function (req, res, next) {};
 
-module.exports.filterByDate = function (req, res) {};
+module.exports.filterByDate = function (req, res, next) {};
 
-module.exports.addOrder = function (req, res) {
+module.exports.addOrder = function (req, res, next) {
   const savedOrder = Order.create({
     userId: req.body.userId,
-    status: 0,
-    discount: req.body.discount,
     orderDate: new Date(),
   })
     .then((order) => {
@@ -114,9 +112,9 @@ module.exports.addOrder = function (req, res) {
     });
 };
 
-module.exports.updateOrder = function (req, res) {};
+module.exports.updateOrder = function (req, res, next) {};
 
-module.exports.deleteOrder = function (req, res) {
+module.exports.deleteOrder = function (req, res, next) {
   Order.findOne({
     where: { id: parseInt(req.params.id) },
   })
@@ -140,7 +138,7 @@ module.exports.deleteOrder = function (req, res) {
     });
 };
 
-module.exports.getAnOrder = function (req, res) {
+module.exports.getAnOrder = function (req, res, next) {
   Order.findOne({
     where: { id: req.params.id },
   })
@@ -156,15 +154,15 @@ module.exports.getAnOrder = function (req, res) {
     });
 };
 
-module.exports.getMaxIDOrder = function (req, res) {
+module.exports.getMaxIDOrder = function (req, res, next) {
   // ????
 };
 
-module.exports.finalizedOrder = function (req, res) {};
+module.exports.finalizedOrder = function (req, res, next) {};
 
-module.exports.abortedOrder = function (req, res) {};
+module.exports.abortedOrder = function (req, res, next) {};
 
 // INCOME
-module.exports.getThisMonthIncome = function (req, res) {};
+module.exports.getThisMonthIncome = function (req, res, next) {};
 
-module.exports.getYearIncome = function (req, res) {};
+module.exports.getYearIncome = function (req, res, next) {};

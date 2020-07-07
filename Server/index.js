@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const productRouter = require("./routers/product");
 const authRouter = require("./routers/auth");
 const orderRouter = require("./routers/order");
+const cartRouter = require("./routers/cart");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,6 +23,8 @@ app.use((req, res, next) => {
 app.use("/product", productRouter);
 app.use("/auth", authRouter);
 app.use("/order", orderRouter);
+app.use("/cart", cartRouter);
+
 app.use((req, res, next) => {
   res.status(404).json("Not Found!!!");
 });

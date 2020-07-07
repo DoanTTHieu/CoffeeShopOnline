@@ -60,8 +60,6 @@ const OrderHistory = (props) => {
             <Order
               id={item.id}
               orderDate={item.orderDate}
-              discount={item.discount}
-              status={item.status}
               userId={item.userId}
             ></Order>
           )}

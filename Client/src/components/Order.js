@@ -15,16 +15,6 @@ const Order = (props) => {
       </View>
 
       <View style={styles.orderLine}>
-        <Text style={styles.propTitle}>Discount:</Text>
-        <Text style={styles.propValue}>{props.discount}</Text>
-      </View>
-
-      <View style={styles.orderLine}>
-        <Text style={styles.propTitle}>Status:</Text>
-        <Text style={styles.propValue}>{props.status}</Text>
-      </View>
-
-      <View style={styles.orderLine}>
         <Text style={styles.propTitle}>User Id:</Text>
         <Text style={styles.propValue}>{props.userId}</Text>
       </View>

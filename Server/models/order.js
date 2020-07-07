@@ -6,14 +6,6 @@ module.exports = (sequelize) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    discount: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    status: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
   };
   const options = {
     tableName: "Order",
