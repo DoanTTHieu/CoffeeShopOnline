@@ -7,7 +7,7 @@ const CartDetail = db.CartDetail;
 const Op = sequelize.Op;
 
 // Total
-module.exports.getCarts = function (req, res) {
+module.exports.getAllCarts = function (req, res, next) {
   Cart.findAll()
     .then((carts) => res.status(200).json(carts))
     .catch((err) => {
@@ -86,3 +86,45 @@ module.exports.getACart = function (req, res, next) {
       next(err);
     });
 };
+
+module.exports.getAllCartDetails = function (req, res, next) {
+  const cartId = req.params.id;
+
+  CartDetail.findAll({
+    where: {
+      cartId: cartId,
+    },
+  }).then((cartDetails) => {
+    res.status(200).json(cartDetails);
+  });
+};
+
+// module.exports.adjustQuantity = function (req, res, next) {
+//   const cartId = req.params.id;
+//   const productId = req.
+//   const modifyChoice = req.params.modify;
+
+//   if (modifyChoice === "increase") {
+//     CartDetail.decrement("quantity", { where: { id: cartDetailId } })
+//       .then((orderDetail) => {
+//         res.status(200).json(orderDetail);
+//       })
+//       .catch((err) => {
+//         if (!err.status) {
+//           err.statusCode = 500;
+//         }
+//         next(err);
+//       });
+//   } else if (modifyChoice === "decrease") {
+//     CartDetail.increase("quantity", { where: { id: cartDetailId } })
+//       .then((orderDetail) => {
+//         res.status(200).json(orderDetail);
+//       })
+//       .catch((err) => {
+//         if (!err.status) {
+//           err.statusCode = 500;
+//         }
+//         next(err);
+//       });
+//   }
+// };

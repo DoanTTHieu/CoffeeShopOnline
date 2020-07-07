@@ -13,8 +13,7 @@ import Feather from "react-native-vector-icons/Feather";
 import * as Animatable from "react-native-animatable";
 
 import { changeUser } from "../../store/actions/users";
-
-const localhost = "192.168.56.1";
+import { ipv4, port } from "../../constant/constant";
 
 const SignInScreen = (props) => {
   const isFirstRun = useRef(true);
@@ -30,13 +29,14 @@ const SignInScreen = (props) => {
 
   const [triggerSignIn, setTriggerSignIn] = useState(false);
 
-  // const [unauthorized, setUnauthorized] = useState(false);
-
   const dispatch = useDispatch();
 
-  const getUserHandler = useCallback(() => {
-    dispatch(changeUser(data.username));
-  }, [dispatch, data.username]);
+  const getUserHandler = useCallback(
+    (cart) => {
+      dispatch(changeUser(data.username, cart));
+    },
+    [dispatch, data.username]
+  );
 
   const handleUsernameChange = (val) => {
     if (!data.isValidUser) data.isValidUser = true;
@@ -92,7 +92,7 @@ const SignInScreen = (props) => {
       isFirstRun.current = false;
       return;
     }
-    const url = `http://${localhost}:3001/auth/login`;
+    const url = `http://${ipv4}:${port}/auth/login`;
     fetch(url, {
       method: "POST",
       headers: {
@@ -111,13 +111,19 @@ const SignInScreen = (props) => {
         return res.json();
       })
       .then(() => {
-        getUserHandler();
+        const url = `http://${ipv4}:${port}/user/getUserId/?username=${data.username}`;
+        fetch(url)
+          .then((res) => res.json())
+          .then((resData) => {
+            getUserHandler(resData);
+          });
       })
+
       .then(() => {
         props.navigation.navigate("SuccessfulValidation");
       })
       .then(() => resetState())
-      .catch((err) => console.log("Error"));
+      .catch((err) => console.log(err));
   }, [triggerSignIn]);
 
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import OrdersView from "../screens/Main/Orders/OrdersView";
+import CartView from "../screens/Main/Cart/CartView";
 import ProductDetail from "../screens/Main/Products/ProductDetail";
 
 const Stack = createStackNavigator();
@@ -12,11 +12,11 @@ export default class OrdersScreen extends React.Component {
   }
   render() {
     return (
-      <Stack.Navigator initialRouteName="OrdersView">
+      <Stack.Navigator initialRouteName="CartView">
         <Stack.Screen name="ProductDetail" component={ProductDetail} />
         <Stack.Screen
-          name="OrdersView"
-          component={OrdersView}
+          name="CartView"
+          component={CartView}
           options={{ headerShown: false }}
           navigation={this.props.navigation}
           ordersArray={this.props.ordersArray}

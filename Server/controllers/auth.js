@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const db = require("../models");
 const User = db.User;
+const Cart = db.Cart;
 
 exports.signup = (req, res, next) => {
   const errors = validationResult(req);
@@ -26,6 +27,12 @@ exports.signup = (req, res, next) => {
         username: username,
       });
       return user.save();
+    })
+    .then((user) => {
+      Cart.create({
+        userId: user.id,
+        pay: false,
+      });
     })
     .then((result) => {
       res.statusCode = 201;

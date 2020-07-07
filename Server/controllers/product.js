@@ -1,6 +1,8 @@
 const db = require("../models");
 const sequelize = require("sequelize");
 const Product = db.Product;
+const Cart = db.Cart;
+const CartDetail = db.CartDetail;
 const Op = sequelize.Op;
 
 module.exports.getAllProducts = function (req, res, next) {
@@ -12,52 +14,6 @@ module.exports.getAllProducts = function (req, res, next) {
       }
       next(err);
     });
-};
-
-module.exports.searchProducts = function (req, res, next) {
-  const productInfo = req.body.info; // {p: 'The'}
-  Product.findAll({
-    where: {
-      [Op.or]: [
-        {
-          title: {
-            [Op.substring]: productInfo,
-          },
-        },
-        {
-          description: {
-            [Op.substring]: productInfo,
-          },
-        },
-      ],
-    },
-  })
-    .then((product) => res.status(200).json(product))
-    .catch((err) => {
-      if (!err.status) err.statusCode = 500;
-      next(err);
-    });
-};
-
-module.exports.getProductCount = function (req, res, next) {
-  // count => trả về number => k cho phép trả về nên bad request nên phải chuyển từ number sang string
-  Product.count()
-    .then((count) => res.status(200).json(count))
-    .catch((err) => {
-      if (!err.status) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
-};
-
-module.exports.getBestSeller = function (req, res) {
-  //  sequelize.query("SELECT TOP 1 B.title, SUM(C.quantity)" +
-  //  " FROM(OrderDetail C JOIN Product B ON C.id = B.id) JOIN Order O ON C.id = O.id" +
-  //  " WHERE MONTH(O.date) = MONTH(GETDATE()) AND YEAR(DATE) = YEAR(GETDATE())" +
-  //  " GROUP BY B.id, title ORDER BY SUM(C.quantity) DESC")
-  //     .then((book) => res.status(200).send(book))
-  //     .catch((err) => res.status(400).send(err.message))
 };
 
 module.exports.addProduct = function (req, res, next) {
@@ -158,6 +114,82 @@ module.exports.getAProduct = function (req, res, next) {
       if (!err.status) statusCode = 500;
       next(err);
     });
+};
+
+module.exports.addToCart = function (req, res, next) {
+  const productId = req.params.id;
+  const cartId = req.body.cartId;
+
+  Product.findOne({
+    where: { id: parseInt(productId) },
+  })
+    .then((product) => {
+      if (!product) {
+        return res.status(400);
+      }
+      return CartDetail.create({
+        cartId: cartId,
+        productId: product.id,
+        quantity: 1,
+        price: product.price,
+      });
+    })
+    .then((orderDetail) => {
+      res.status(200).json(orderDetail);
+    })
+    .catch((err) => {
+      if (!err.status) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+///////////////////////////
+module.exports.searchProducts = function (req, res, next) {
+  const productInfo = req.body.info; // {p: 'The'}
+  Product.findAll({
+    where: {
+      [Op.or]: [
+        {
+          title: {
+            [Op.substring]: productInfo,
+          },
+        },
+        {
+          description: {
+            [Op.substring]: productInfo,
+          },
+        },
+      ],
+    },
+  })
+    .then((product) => res.status(200).json(product))
+    .catch((err) => {
+      if (!err.status) err.statusCode = 500;
+      next(err);
+    });
+};
+
+module.exports.getProductCount = function (req, res, next) {
+  // count => trả về number => k cho phép trả về nên bad request nên phải chuyển từ number sang string
+  Product.count()
+    .then((count) => res.status(200).json(count))
+    .catch((err) => {
+      if (!err.status) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+module.exports.getBestSeller = function (req, res) {
+  //  sequelize.query("SELECT TOP 1 B.title, SUM(C.quantity)" +
+  //  " FROM(OrderDetail C JOIN Product B ON C.id = B.id) JOIN Order O ON C.id = O.id" +
+  //  " WHERE MONTH(O.date) = MONTH(GETDATE()) AND YEAR(DATE) = YEAR(GETDATE())" +
+  //  " GROUP BY B.id, title ORDER BY SUM(C.quantity) DESC")
+  //     .then((book) => res.status(200).send(book))
+  //     .catch((err) => res.status(400).send(err.message))
 };
 
 module.exports.getAvailableProducts = (req, res, next) => {

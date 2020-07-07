@@ -10,7 +10,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import * as Animatable from "react-native-animatable";
 
-const localhost = "192.168.56.1";
+import { ipv4, port } from "../../constant/constant";
 
 const SignUpScreen = (props) => {
   const [data, setData] = useState({
@@ -104,7 +104,7 @@ const SignUpScreen = (props) => {
     }
     // setTriggerSignUp(!triggerSignUp);
 
-    const url = `http://${localhost}:3001/auth/signup`;
+    const url = `http://${ipv4}:${port}/auth/signup`;
 
     fetch(url, {
       method: "PUT",

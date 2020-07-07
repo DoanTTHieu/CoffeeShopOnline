@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
     Cart.belongsToMany(models.Product, {
       through: "CartDetail",
       as: "Products",
-      foreignKey: "cardId",
+      foreignKey: "cartId",
       otherKey: "productId",
       onDelete: "cascade",
     });

@@ -12,7 +12,7 @@ export default class LoginHomeNavigator extends React.Component {
   }
   render() {
     return (
-      <Stack.Navigator initialRouteName="OrdersView">
+      <Stack.Navigator initialRouteName="Auth">
         <Stack.Screen
           name="Auth"
           component={Auth}

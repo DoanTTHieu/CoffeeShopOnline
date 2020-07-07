@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {View } from "react-native";
+import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -26,7 +26,7 @@ export default class TabNavigator extends Component {
                 iconName = focused ? "md-person" : "md-person";
               } else if (route.name === "Products") {
                 iconName = focused ? "ios-cafe" : "ios-cafe";
-              } else if (route.name === "Orders") {
+              } else if (route.name === "Cart") {
                 iconName = focused ? "ios-list-box" : "ios-list";
               }
 
@@ -39,7 +39,7 @@ export default class TabNavigator extends Component {
           }}
         >
           <Tab.Screen name="Products" component={ProductsScreen} />
-          <Tab.Screen name="Orders" component={OrdersScreen} />
+          <Tab.Screen name="Cart" component={OrdersScreen} />
           <Tab.Screen name="Contact" component={ContactScreen} />
         </Tab.Navigator>
       </View>
