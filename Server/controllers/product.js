@@ -120,28 +120,43 @@ module.exports.addToCart = function (req, res, next) {
   const productId = req.params.id;
   const cartId = req.body.cartId;
 
-  Product.findOne({
-    where: { id: parseInt(productId) },
-  })
+  const addedProduct = Product.findOne({
+    where: { id: productId },
+  });
+
+  const checkedCartDetail = addedProduct
     .then((product) => {
-      if (!product) {
-        return res.status(400);
-      }
-      return CartDetail.create({
-        cartId: cartId,
-        productId: product.id,
-        quantity: 1,
-        price: product.price,
+      return CartDetail.findOne({
+        where: {
+          cartId: cartId,
+          productId: product.id,
+        },
       });
-    })
-    .then((orderDetail) => {
-      res.status(200).json(orderDetail);
     })
     .catch((err) => {
       if (!err.status) {
         err.statusCode = 500;
       }
-      next(err);
+    });
+
+  return Promise.all([addedProduct, checkedCartDetail])
+    .then(([product, cartDetail]) => {
+      if (!cartDetail) {
+        CartDetail.create({
+          cartId: cartId,
+          productId: product.id,
+          quantity: 1,
+          price: product.price,
+        }).then((newCartDetail) => res.status(200).json(newCartDetail));
+      } else {
+        product;
+        res.redirect(
+          `/cart/${cartId}/updateQuantity/?productId=${productId}&choice=inc`
+        );
+      }
+    })
+    .catch((err) => {
+      res.json(err);
     });
 };
 

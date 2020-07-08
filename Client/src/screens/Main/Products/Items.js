@@ -25,7 +25,10 @@ const Items = (props) => {
     <View style={{ flex: 1 }}>
       <FlatList
         data={dataSource}
-        renderItem={({ item }) => <Item category={item} />}
+        renderItem={({ item }) => (
+          <Item item={item} id={props.id} onSelect={props.onSelect} />
+        )}
+        keyExtractor={(item, index) => item.id.toString()}
       />
     </View>
   );

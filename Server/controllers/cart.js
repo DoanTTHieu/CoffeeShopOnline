@@ -1,6 +1,6 @@
 const db = require("../models");
 const sequelize = require("sequelize");
-const { body } = require("express-validator");
+
 const Cart = db.Cart;
 const Product = db.Product;
 const CartDetail = db.CartDetail;
@@ -45,8 +45,6 @@ module.exports.addCart = function (req, res, next) {
     });
 };
 
-module.exports.updateCart = function (req, res) {};
-
 module.exports.deleteCart = function (req, res, next) {
   Cart.findOne({
     where: { id: parseInt(req.params.id) },
@@ -76,9 +74,10 @@ module.exports.getACart = function (req, res, next) {
     where: { id: req.params.id },
   })
     .then((cart) => {
-      if (cart) {
-        res.status(200).json(cart);
+      if (!cart) {
+        res.status(400).json("Cannot find any cart");
       }
+      res.status(200).json(cart);
       next();
     })
     .catch((err) => {
@@ -90,41 +89,44 @@ module.exports.getACart = function (req, res, next) {
 module.exports.getAllCartDetails = function (req, res, next) {
   const cartId = req.params.id;
 
-  CartDetail.findAll({
-    where: {
-      cartId: cartId,
-    },
-  }).then((cartDetails) => {
-    res.status(200).json(cartDetails);
-  });
+  db.sequelize
+    .query(
+      `SELECT * FROM cartdetail as cd, product as p WHERE cd.cartId=${cartId} AND cd.productId=p.id`,
+      {
+        type: sequelize.QueryTypes.SELECT,
+      }
+    )
+    .then((result) => {
+      res.json({ id: cartId, detail: result });
+    });
 };
 
-// module.exports.adjustQuantity = function (req, res, next) {
-//   const cartId = req.params.id;
-//   const productId = req.
-//   const modifyChoice = req.params.modify;
+module.exports.updateQuantityCartDetail = function (req, res, next) {
+  const choice = req.query.choice;
+  const cartId = req.params.cartId;
+  const productId = req.query.productId;
 
-//   if (modifyChoice === "increase") {
-//     CartDetail.decrement("quantity", { where: { id: cartDetailId } })
-//       .then((orderDetail) => {
-//         res.status(200).json(orderDetail);
-//       })
-//       .catch((err) => {
-//         if (!err.status) {
-//           err.statusCode = 500;
-//         }
-//         next(err);
-//       });
-//   } else if (modifyChoice === "decrease") {
-//     CartDetail.increase("quantity", { where: { id: cartDetailId } })
-//       .then((orderDetail) => {
-//         res.status(200).json(orderDetail);
-//       })
-//       .catch((err) => {
-//         if (!err.status) {
-//           err.statusCode = 500;
-//         }
-//         next(err);
-//       });
-//   }
-// };
+  if (choice === "inc") {
+    CartDetail.findOne({
+      where: {
+        [Op.and]: [
+          {
+            productId: productId,
+          },
+          {
+            cartId: cartId,
+          },
+        ],
+      },
+    }).then((cd) => {
+      return cd
+        .update({
+          // price: 100000,
+          quantity: sequelize.literal("quantity+1"),
+        })
+        .then((cd) => {
+          res.status(200).json(cd);
+        });
+    });
+  }
+};

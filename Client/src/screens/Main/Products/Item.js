@@ -1,27 +1,47 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
-export default function Item(props) {
-  const { category, onPress } = props;
+
+import { clickItem } from "../../../store/actions/items";
+
+const Item = (props) => {
+  const { item, onPress } = props;
   const { imageStyle, price, name } = styles;
+
+  const [itemClicked, setItemClicked] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const clickItemHandler = useCallback(() => {
+    dispatch(clickItem(props.item));
+  }, [itemClicked]);
+
   return (
-    <TouchableOpacity onPress={onPress} style={{flex: 1}}>
+    <TouchableOpacity
+      style={{ flex: 1 }}
+      onPress={() => {
+        clickItemHandler();
+        props.onSelect();
+      }}
+    >
       <View style={styles.item}>
         <View>
           <Image
             style={imageStyle}
-            source={{ uri: category.imageUrl }}
-            keyExtractor={category.id}
- 
+            source={{ uri: item.imageUrl }}
+            keyExtractor={item.id}
           />
         </View>
         <View style={styles.content}>
-          <Text style={name}>{category.title}</Text>
-          <Text style={price}>${category.price}</Text>
+          <Text style={name}>{item.title}</Text>
+          <Text style={price}>${item.price}</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
-}
+};
+
+export default Item;
 
 const styles = StyleSheet.create({
   item: {
@@ -44,7 +64,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-
   },
   imageStyle: {
     width: 150,

@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Auth from "../navigation/AuthNavigation";
-import Menu from "../navigation/MenuNavigator";
+import AuthNav from "../navigation/AuthNavigation";
+import MainNav from "../navigation/MainNavigator";
 import SuccessfulValidation from "../screens/Auth/SuccessfulValidationScreen";
 
 const Stack = createStackNavigator();
@@ -15,7 +15,7 @@ export default class LoginHomeNavigator extends React.Component {
       <Stack.Navigator initialRouteName="Auth">
         <Stack.Screen
           name="Auth"
-          component={Auth}
+          component={AuthNav}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -24,8 +24,8 @@ export default class LoginHomeNavigator extends React.Component {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Menu"
-          component={Menu}
+          name="Main"
+          component={MainNav}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

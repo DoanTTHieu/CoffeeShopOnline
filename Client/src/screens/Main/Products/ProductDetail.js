@@ -1,95 +1,123 @@
-import React, { Component } from "react";
+import React, { useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   View,
   Text,
   StyleSheet,
   Image,
   Dimensions,
-  ScrollView,
   TouchableOpacity,
 } from "react-native";
 
-const back = require("../../../../assets/icons/back.png");
-const cart = require("../../../../assets/icons/cart.png");
-import image from "../../../../assets/items/capuchino.jpg";
+import { ipv4, port } from "../../../constant/constant";
+import { changeUser } from "../../../store/actions/users";
 
-export default class ProductDetail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isSpecialProduct: true,
-    };
-  }
-  goBack() {
-    const { navigation } = this.props;
-    navigation.goBack();
-  }
-  render() {
-    const {
-      wrapper,
-      cardStyle,
-      header,
-      footer,
-      backStyle,
-      imageContainer,
-      cartStyle,
-      textBlack,
-      textSmoke,
-      textHighlight,
-      textMain,
-      titleContainer,
-      descContainer,
-      productImageStyle,
-      descStyle,
-    } = styles;
-    return (
-      <View style={wrapper}>
-        <View style={cardStyle}>
-          <View style={header}>
-            <TouchableOpacity onPress={this.goBack.bind(this)}>
-              <Image style={backStyle} source={back} />
-            </TouchableOpacity>
-            <TouchableOpacity 
-            //onPress={this.addThisProduct.bind(this)}
-            >
-              <Image style={cartStyle} source={cart} />
-            </TouchableOpacity>
+const backIcon = require("../../../../assets/icons/back.png");
+const cartIcon = require("../../../../assets/icons/cart.png");
+
+const ProductDetail = (props) => {
+  const selectedItem = useSelector((state) => state.items.selectedItem);
+  const currentCart = useSelector((state) => state.users.cart);
+  const currentUser = useSelector((state) => state.users.username);
+
+  const dispatch = useDispatch();
+
+  const addToCart = useCallback(
+    (cart) => {
+      dispatch(
+        changeUser(currentUser, {
+          id: currentCart.id,
+          detail: [...cart.detail],
+        })
+      );
+    },
+    [dispatch, currentCart]
+  );
+
+  const addToCartHandler = () => {
+    const url = `http://${ipv4}:${port}/product/${selectedItem.id}/addToCart`;
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        productId: selectedItem.id,
+        cartId: currentCart.id,
+      }),
+    })
+      .then(() => {
+        const url = `http://${ipv4}:${port}/cart/${currentCart.id}/detail`;
+        fetch(`http://${ipv4}:${port}/cart/${currentCart.id}/detail`)
+          .then((data) => {
+            return data.json();
+          })
+          .then((cart) => {
+            addToCart(cart);
+          })
+          .then(() => {
+            props.navigation.goBack();
+          });
+      })
+
+      .catch((err) => console.log(err));
+  };
+
+  const {
+    wrapper,
+    cardStyle,
+    header,
+    footer,
+    backStyle,
+    imageContainer,
+    cartStyle,
+    textBlack,
+    textSmoke,
+    textHighlight,
+    textMain,
+    titleContainer,
+    descContainer,
+    productImageStyle,
+    descStyle,
+    button,
+    buttonText,
+  } = styles;
+
+  return (
+    <View style={wrapper}>
+      <View style={cardStyle}>
+        <View style={header}>
+          <TouchableOpacity onPress={props.navigation.goBack}>
+            <Image style={backStyle} source={backIcon} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image style={cartStyle} source={cartIcon} />
+          </TouchableOpacity>
+        </View>
+        <View style={footer}>
+          <View style={titleContainer}>
+            <Text style={textMain}>
+              <Text style={textBlack}>name of product</Text>
+              <Text style={textHighlight}> / </Text>
+              <Text style={textSmoke}>100$</Text>
+            </Text>
           </View>
-          <View style={imageContainer}>
-            <ScrollView
-              style={{
-                flexDirection: "row",
-                padding: 10,
-                height: swiperHeight,
-              }}
-              horizontal
-            >
-              <Image source={image} style={productImageStyle} />
-              <Image source={image} style={productImageStyle} />
-            </ScrollView>
+          <View style={descContainer}>
+            <Text style={descStyle}>description of product</Text>
           </View>
-          <View style={footer}>
-            <View style={titleContainer}>
-              <Text style={textMain}>
-                {/* <Text style={textBlack}>{product.name.toUpperCase()}</Text>
-                                <Text style={textHighlight}> / </Text>
-                                <Text style={textSmoke}>{product.price}$</Text> */}
-                <Text style={textBlack}>name of product</Text>
-                <Text style={textHighlight}> / </Text>
-                <Text style={textSmoke}>100$</Text>
-              </Text>
-            </View>
-            <View style={descContainer}>
-              <Text style={descStyle}>description of product</Text>
-            </View>
-          </View>
+          <TouchableOpacity style={button} onPress={addToCartHandler}>
+            <Text style={buttonText}>ADD TO CART</Text>
+          </TouchableOpacity>
         </View>
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
 
-const { width } = Dimensions.get("window");
+export default ProductDetail;
+
+const { width, height } = Dimensions.get("window");
 const swiperWidth = width / 1.5 - 30;
 const swiperHeight = (swiperWidth * 452) / 361;
 
@@ -107,10 +135,17 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
+    backgroundColor: "lime",
     justifyContent: "space-between",
     flex: 1,
     paddingHorizontal: 15,
     paddingTop: 20,
+  },
+  footer: {
+    flex: 6,
+    backgroundColor: "orange",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
   cartStyle: {
     width: 40,
@@ -124,33 +159,26 @@ const styles = StyleSheet.create({
     width: width / 2,
     height: width / 2,
   },
-  footer: {
-    flex: 6,
-  },
   imageContainer: {
     flex: 6,
     alignItems: "center",
     flexDirection: "row",
     marginHorizontal: 10,
-    //backgroundColor: "blue"
   },
   textMain: {
     paddingLeft: 20,
     marginVertical: 10,
   },
   textBlack: {
-    //fontFamily: 'Avenir',
     fontSize: 20,
     fontWeight: "bold",
     color: "#3F3F46",
   },
   textSmoke: {
-    //fontFamily: "Avenir",
     fontSize: 20,
     color: "#9A9A9A",
   },
   textHighlight: {
-    //fontFamily: "Avenir",
     fontSize: 20,
     color: "#7D59C8",
   },
@@ -180,5 +208,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignSelf: "stretch",
     paddingLeft: 20,
+  },
+  button: {
+    backgroundColor: "#f7c744",
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    width: (width / 8) * 3,
+    height: height / 20,
+    margin: width / 10,
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
