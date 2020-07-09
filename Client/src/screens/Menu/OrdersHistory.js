@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelect, useSelector } from "react-redux";
 import {
   View,
   TouchableOpacity,
@@ -17,19 +18,21 @@ import { ipv4, port } from "../../constant/constant";
 const OrderHistory = (props) => {
   const [dataSource, setDataSource] = useState([]);
 
+  const userId = useSelector((state) => state.users.cart.id);
+
   const goBackToMain = () => {
     props.navigation.goBack();
   };
 
   useEffect(() => {
-    const url = `http://${ipv4}:${port}/order`;
+    const url = `http://${ipv4}:${port}/user/${userId}/getOrders`;
     fetch(url)
       .then((res) => res.json())
       .then((resData) => {
         setDataSource(resData);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [dataSource]);
 
   const {
     wrapper,
@@ -63,6 +66,7 @@ const OrderHistory = (props) => {
               userId={item.userId}
             ></Order>
           )}
+          keyExtractor={(item, index) => item.id}
         />
       </View>
     </Animatable.View>

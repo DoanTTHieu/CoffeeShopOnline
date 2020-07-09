@@ -130,3 +130,23 @@ module.exports.updateQuantityCartDetail = function (req, res, next) {
     });
   }
 };
+
+module.exports.pay = function (req, res, next) {
+  CartDetail.findAll({
+    where: {
+      cartId: req.body.userId,
+    },
+  })
+    .then((cartDetails) => {
+      cartDetails.forEach((item) => {
+        item.destroy();
+      });
+    })
+    .then(() => {
+      res.redirect(307, "/order/add");
+    })
+    .catch((err) => {
+      if (!err.status) err.statusCode = 500;
+      next(err);
+    });
+};

@@ -91,12 +91,13 @@ module.exports.addOrder = function (req, res, next) {
     .then((order) => {
       req.body.products.forEach((item) => {
         Product.findOne({
-          where: { id: parseInt(item.id) },
+          where: { id: item.id },
         }).then((product) => {
           if (!product) {
             return res.status(400);
           }
-          const orderDetail = OrderDetail.create({
+
+          OrderDetail.create({
             orderId: order.id,
             productId: item.id,
             quantity: item.quantity,
@@ -153,16 +154,3 @@ module.exports.getAnOrder = function (req, res, next) {
       next(err);
     });
 };
-
-module.exports.getMaxIDOrder = function (req, res, next) {
-  // ????
-};
-
-module.exports.finalizedOrder = function (req, res, next) {};
-
-module.exports.abortedOrder = function (req, res, next) {};
-
-// INCOME
-module.exports.getThisMonthIncome = function (req, res, next) {};
-
-module.exports.getYearIncome = function (req, res, next) {};

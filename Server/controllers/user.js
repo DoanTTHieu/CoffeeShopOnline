@@ -2,7 +2,7 @@ const db = require("../models");
 const sequelize = require("sequelize");
 const { body } = require("express-validator");
 const User = db.User;
-const Product = db.Product;
+const Order = db.Order;
 const Cart = db.Cart;
 const Op = sequelize.Op;
 
@@ -49,6 +49,23 @@ module.exports.getUserIdByName = function (req, res, next) {
         err.statusCode = 500;
       }
       next(err);
+    });
+};
+
+module.exports.getAllOrders = function (req, res, next) {
+  const userId = req.params.id;
+  Order.findAll({
+    where: {
+      userId: userId,
+    },
+  })
+    .then((order) => {
+      res.status(200).json(order);
+    })
+    .catch((err) => {
+      if (!err.status) {
+        err.statusCode = 500;
+      }
     });
 };
 

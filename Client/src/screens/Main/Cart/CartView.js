@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useCallback, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Dimensions,
   ScrollView,
@@ -11,9 +11,61 @@ import {
 
 import Header from "../../../components/Header";
 import CartDetail from "../../../components/CarDetail";
+import { ipv4, port } from "../../../constant/constant";
+import { changeUser } from "../../../store/actions/users";
 
 const CartView = (props) => {
   const { main, checkoutButton, checkoutTitle, wrapper } = styles;
+
+  const [pay, setPay] = useState(true);
+
+  const currentUser = useSelector((state) => state.users);
+
+  const cartId = useSelector((state) => state.users.cart.id);
+
+  const products = useSelector((state) => state.users.cart.detail);
+
+  const dispatch = useDispatch();
+
+  const removeCartDetailHandler = useCallback(() => {
+    dispatch(
+      changeUser(currentUser.username, {
+        id: currentUser.cart.id,
+        detail: [],
+      })
+    );
+  }, [dispatch, currentUser.cart.detail]);
+
+  const payHandler = () => {
+    if (currentUser.cart.detail.length) {
+      setPay(false);
+    }
+  };
+
+  useEffect(() => {
+    if (pay) return;
+    const url = `http://${ipv4}:${port}/cart/${cartId}/pay`;
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: cartId,
+        products: products,
+      }),
+    })
+      .then(() => {
+        removeCartDetailHandler();
+      })
+      .then(() => {
+        setPay(true);
+      })
+      .catch((err) => () => {
+        console.log("hello");
+      });
+  }, [pay]);
 
   return (
     <View style={wrapper}>
@@ -29,7 +81,7 @@ const CartView = (props) => {
           />
         ))}
       </ScrollView>
-      <TouchableOpacity style={checkoutButton}>
+      <TouchableOpacity style={checkoutButton} onPress={payHandler}>
         <Text style={checkoutTitle}>TOTAL {1000}$ CHECKOUT NOW</Text>
       </TouchableOpacity>
     </View>
