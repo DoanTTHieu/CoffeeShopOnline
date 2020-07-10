@@ -15,7 +15,7 @@ import { ipv4, port } from "../../../constant/constant";
 import { changeUser } from "../../../store/actions/users";
 
 const CartView = (props) => {
-  const { main, checkoutButton, checkoutTitle, wrapper } = styles;
+  const { main, checkoutButton, checkoutTitle, wrapper, title, headerTitle } = styles;
 
   const [pay, setPay] = useState(true);
 
@@ -69,7 +69,13 @@ const CartView = (props) => {
 
   return (
     <View style={wrapper}>
-      <Header navigation={props.navigation} />
+      <View style={title}>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Text style={headerTitle}>Cart</Text>
+        </View>
+      </View>
       <ScrollView style={main}>
         {useSelector((state) => state.users.cart.detail).map((item) => (
           <CartDetail
@@ -114,4 +120,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  title: {
+    height: 50,
+    backgroundColor: "#f7c744",
+  },
+    headerTitle: { color: "#203546", fontSize: 20 },
 });
