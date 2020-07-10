@@ -7,14 +7,15 @@ import {
   TouchableOpacity,
   View,
   Text,
+  TextInput
 } from "react-native";
 
-const toTitleCase = (str) => {
-  return str.replace(
-    /\w\S*/g,
-    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-  );
-};
+  // const toTitleCase = (str) => {
+  //   return str.replace(
+  //     /\w\S*/g,
+  //     (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  //   );
+  // };
 
 const CartDetail = (props) => {
   const {
@@ -27,7 +28,10 @@ const CartDetail = (props) => {
     numberOfProduct,
     txtShowDetail,
     showDetailContainer,
+    QuantityStyle,
+    QuantityInput
   } = styles;
+//  const [value, onChangeText] = React.useState(props.item.quantity);
 
   return (
     <View style={product} key={Math.random()}>
@@ -39,20 +43,29 @@ const CartDetail = (props) => {
             flexDirection: "row",
           }}
         >
-          <Text style={txtName}>{toTitleCase("Name of product")}</Text>
+          <Text style={txtName}>{props.item.title}</Text>
           <TouchableOpacity>
             <Text style={{ color: "#969696" }}>X</Text>
           </TouchableOpacity>
         </View>
         <View>
-          <Text style={txtPrice}>{props.item.price} DONG</Text>
+          <Text style={txtPrice}>{props.item.price} Dong</Text>
         </View>
         <View style={productController}>
           <View style={numberOfProduct}>
             <TouchableOpacity>
               <Text>+</Text>
             </TouchableOpacity>
-            <Text>{props.item.quantity}</Text>
+            {/* <Text>{props.item.quantity}</Text> */}
+            {/* <TextInput>{props.item.quantity}</TextInput> */}
+            <View style={QuantityStyle}>
+              <TextInput
+                //set quantity
+                //onChangeText={text => onChangeText(text)}
+                style={QuantityInput}
+                keyboardType={'numeric'}
+              />
+            </View>
             <TouchableOpacity>
               <Text>-</Text>
             </TouchableOpacity>
@@ -127,4 +140,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
   },
+  QuantityInput: {
+    textAlign: 'center',
+    width: 40,
+    borderRadius: 5
+  },
+  QuantityStyle:{
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: "#C21C70"
+  }
+
 });
