@@ -13,7 +13,7 @@ import { ipv4, port } from "../../../constant/constant";
 import { changeUser } from "../../../store/actions/users";
 
 const backIcon = require("../../../../assets/icons/blackback.png");
-
+const picture = require("../../../../assets/items/capuchino.jpg");
 
 const ProductDetail = (props) => {
   const selectedItem = useSelector((state) => state.items.selectedItem);
@@ -70,7 +70,6 @@ const ProductDetail = (props) => {
     footer,
     backStyle,
     imageContainer,
-    cartStyle,
     textBlack,
     textSmoke,
     textHighlight,
@@ -81,6 +80,7 @@ const ProductDetail = (props) => {
     descStyle,
     button,
     buttonText,
+    image
   } = styles;
 
   return (
@@ -89,6 +89,9 @@ const ProductDetail = (props) => {
         <TouchableOpacity onPress={props.navigation.goBack}>
           <Image style={backStyle} source={backIcon} />
         </TouchableOpacity>
+      </View>
+      <View style={imageContainer}>
+        <Image source={picture} style={image}/>
       </View>
       <View style={footer}>
         <View style={titleContainer}>
@@ -120,8 +123,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFFFFF",
     borderRadius: 10,
-    marginHorizontal: 10,
-    marginVertical: 10,
+    //marginHorizontal: 10,
+    //marginVertical: 10,
   },
   header: {
     flexDirection: "row",
@@ -135,7 +138,7 @@ const styles = StyleSheet.create({
   footer: {
     flex: 6,
     backgroundColor: "white",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "flex-end",
   },
   cartStyle: {
@@ -151,10 +154,9 @@ const styles = StyleSheet.create({
     height: width / 2,
   },
   imageContainer: {
-    flex: 6,
-    alignItems: "center",
-    flexDirection: "row",
-    marginHorizontal: 10,
+    margin: 10, 
+    marginRight: 10, 
+    marginBottom: 10
   },
   textMain: {
     paddingLeft: 20,
@@ -213,4 +215,8 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
   },
+  image: {
+    height: width, 
+    width: width-20
+  }
 });
