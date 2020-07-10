@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity, Dimensions } from "react-native";
 
 import { clickItem } from "../../../store/actions/items";
+const { width } = Dimensions.get("window");
 
 const Item = (props) => {
   const { item, onPress } = props;
@@ -45,13 +46,15 @@ export default Item;
 
 const styles = StyleSheet.create({
   item: {
-    flexGrow: 1,
+    width: width/2 -10,
+    //flexGrow: 1,
     backgroundColor: "#f7c744",
     padding: 5,
     marginLeft: 5,
+    marginRight: 5,
     marginVertical: 5,
     marginHorizontal: 5,
-    flexDirection: "row",
+    flexDirection: "column",
     shadowColor: "#2E272B",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
@@ -66,8 +69,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageStyle: {
-    width: 150,
-    height: 150,
+    width: width/2 -20,
+    height: width/2 -20,
     borderRadius: 5,
   },
   price: {

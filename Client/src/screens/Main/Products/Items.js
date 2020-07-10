@@ -25,6 +25,7 @@ const Items = (props) => {
     <View style={{ flex: 1 }}>
       <FlatList
         data={dataSource}
+        numColumns={2}
         renderItem={({ item }) => (
           <Item item={item} id={props.id} onSelect={props.onSelect} />
         )}

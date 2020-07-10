@@ -16,9 +16,18 @@ class Contact extends Component {
       rowInfoContainer,
       imageStyle,
       infoText,
+      title,
+      headerTitle
     } = styles;
     return (
       <View style={wrapper}>
+        <View style={title}>
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <Text style={headerTitle}>Contact</Text>
+          </View>
+        </View>
         <View style={mapContainer}>
           <Image
             style={{ flex: 1, alignSelf: "stretch", width: undefined }}
@@ -96,6 +105,11 @@ const styles = StyleSheet.create({
     color: "#AE005E",
     fontWeight: "500",
   },
+  title:{
+    height: 50,
+    backgroundColor: "#f7c744",
+  },
+    headerTitle: { color: "#203546", fontSize: 20 },
 });
 
 export default Contact;

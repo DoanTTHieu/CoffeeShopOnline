@@ -12,8 +12,8 @@ import {
 import { ipv4, port } from "../../../constant/constant";
 import { changeUser } from "../../../store/actions/users";
 
-const backIcon = require("../../../../assets/icons/back.png");
-const cartIcon = require("../../../../assets/icons/cart.png");
+const backIcon = require("../../../../assets/icons/blackback.png");
+
 
 const ProductDetail = (props) => {
   const selectedItem = useSelector((state) => state.items.selectedItem);
@@ -65,7 +65,6 @@ const ProductDetail = (props) => {
   };
 
   const {
-    wrapper,
     cardStyle,
     header,
     footer,
@@ -85,31 +84,26 @@ const ProductDetail = (props) => {
   } = styles;
 
   return (
-    <View style={wrapper}>
-      <View style={cardStyle}>
-        <View style={header}>
-          <TouchableOpacity onPress={props.navigation.goBack}>
-            <Image style={backStyle} source={backIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image style={cartStyle} source={cartIcon} />
-          </TouchableOpacity>
+    <View style={cardStyle}>
+      <View style={header}>
+        <TouchableOpacity onPress={props.navigation.goBack}>
+          <Image style={backStyle} source={backIcon} />
+        </TouchableOpacity>
+      </View>
+      <View style={footer}>
+        <View style={titleContainer}>
+          <Text style={textMain}>
+            <Text style={textBlack}>name of product</Text>
+            <Text style={textHighlight}> / </Text>
+            <Text style={textSmoke}>100$</Text>
+          </Text>
         </View>
-        <View style={footer}>
-          <View style={titleContainer}>
-            <Text style={textMain}>
-              <Text style={textBlack}>name of product</Text>
-              <Text style={textHighlight}> / </Text>
-              <Text style={textSmoke}>100$</Text>
-            </Text>
-          </View>
-          <View style={descContainer}>
-            <Text style={descStyle}>description of product</Text>
-          </View>
-          <TouchableOpacity style={button} onPress={addToCartHandler}>
-            <Text style={buttonText}>ADD TO CART</Text>
-          </TouchableOpacity>
+        <View style={descContainer}>
+          <Text style={descStyle}>description of product</Text>
         </View>
+        <TouchableOpacity style={button} onPress={addToCartHandler}>
+          <Text style={buttonText}>ADD TO CART</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -122,28 +116,25 @@ const swiperWidth = width / 1.5 - 30;
 const swiperHeight = (swiperWidth * 452) / 361;
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    backgroundColor: "#D6D6D6",
-  },
   cardStyle: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-    borderRadius: 5,
+    borderRadius: 10,
     marginHorizontal: 10,
     marginVertical: 10,
   },
   header: {
     flexDirection: "row",
-    backgroundColor: "lime",
+    backgroundColor: "#f7c744",
     justifyContent: "space-between",
-    flex: 1,
-    paddingHorizontal: 15,
-    paddingTop: 20,
+    height: 50,
+    //flex: 1,
+    paddingHorizontal: 10,
+    paddingTop: 10,
   },
   footer: {
     flex: 6,
-    backgroundColor: "orange",
+    backgroundColor: "white",
     justifyContent: "flex-end",
     alignItems: "flex-end",
   },
@@ -152,8 +143,8 @@ const styles = StyleSheet.create({
     height: 40,
   },
   backStyle: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
   },
   productStyle: {
     width: width / 2,
