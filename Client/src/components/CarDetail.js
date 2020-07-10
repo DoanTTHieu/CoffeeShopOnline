@@ -7,19 +7,19 @@ import {
   TouchableOpacity,
   View,
   Text,
-  TextInput
+  TextInput,
 } from "react-native";
 import { useSelector } from "react-redux";
 
 import { ipv4, port } from "../constant/constant";
 import { changeUser } from "../store/actions/users";
 
-  // const toTitleCase = (str) => {
-  //   return str.replace(
-  //     /\w\S*/g,
-  //     (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-  //   );
-  // };
+const toTitleCase = (str) => {
+  return str.replace(
+    /\w\S*/g,
+    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  );
+};
 
 const CartDetail = (props) => {
   const {
@@ -33,9 +33,9 @@ const CartDetail = (props) => {
     txtShowDetail,
     showDetailContainer,
     QuantityStyle,
-    QuantityInput
+    QuantityInput,
   } = styles;
-//  const [value, onChangeText] = React.useState(props.item.quantity);
+  //  const [value, onChangeText] = React.useState(props.item.quantity);
 
   const [trigger, setTrigger] = useState(false);
 
@@ -81,7 +81,7 @@ const CartDetail = (props) => {
   return (
     <View style={product} key={Math.random()}>
       <Image source={props.item.imageUrl} style={productImage} />
-      <View style={[mainRight]}>
+      <View style={mainRight}>
         <View
           style={{
             justifyContent: "space-between",
@@ -110,25 +110,26 @@ const CartDetail = (props) => {
                 //set quantity
                 //onChangeText={text => onChangeText(text)}
                 style={QuantityInput}
-                keyboardType={'numeric'}
+                keyboardType={"numeric"}
               />
             </View>
             <TouchableOpacity>
-            <Text>{props.item.quantity}</Text>
+              <Text>{props.item.quantity}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  updateQuantityHandler("desc");
+                }}
+              >
+                <Text>-</Text>
+              </TouchableOpacity>
+            </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => {
-                updateQuantityHandler("desc");
-              }}
+              style={showDetailContainer}
+              onPress={props.onSelect}
             >
-              <Text>-</Text>
+              <Text style={txtShowDetail}>SHOW DETAILS</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={showDetailContainer}
-            onPress={props.onSelect}
-          >
-            <Text style={txtShowDetail}>SHOW DETAILS</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -194,14 +195,14 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   QuantityInput: {
-    textAlign: 'center',
-    width: 40,
-    borderRadius: 5
+    textAlign: "center",
+    width: 100,
+    height: 30,
+    borderRadius: 5,
   },
-  QuantityStyle:{
+  QuantityStyle: {
     borderWidth: 1,
     borderRadius: 3,
-    borderColor: "#C21C70"
-  }
-
+    borderColor: "#C21C70",
+  },
 });

@@ -1,6 +1,13 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { Text, View, StyleSheet, Image, TouchableOpacity, Dimensions } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 
 import { clickItem } from "../../../store/actions/items";
 const { width } = Dimensions.get("window");
@@ -27,11 +34,12 @@ const Item = (props) => {
     >
       <View style={styles.item}>
         <View>
-          <Image
+          {/* <Image
             style={imageStyle}
             source={{ uri: item.imageUrl }}
             keyExtractor={item.id}
-          />
+          /> */}
+          <View style={imageStyle}></View>
         </View>
         <View style={styles.content}>
           <Text style={name}>{item.title}</Text>
@@ -46,7 +54,7 @@ export default Item;
 
 const styles = StyleSheet.create({
   item: {
-    width: width/2 -10,
+    width: width / 2 - 10,
     //flexGrow: 1,
     backgroundColor: "#f7c744",
     padding: 5,
@@ -69,8 +77,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageStyle: {
-    width: width/2 -20,
-    height: width/2 -20,
+    width: width / 2 - 20,
+    height: width / 2 - 20,
     borderRadius: 5,
   },
   price: {

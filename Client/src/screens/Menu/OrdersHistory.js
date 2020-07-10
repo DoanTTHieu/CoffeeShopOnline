@@ -18,21 +18,23 @@ import { ipv4, port } from "../../constant/constant";
 const OrderHistory = (props) => {
   const [dataSource, setDataSource] = useState([]);
 
-  const userId = useSelector((state) => state.users.cart.id);
+  const currentUser = useSelector((state) => state.users);
 
   const goBackToMain = () => {
     props.navigation.goBack();
   };
 
+  const currentCart = currentUser.cart;
+
   useEffect(() => {
-    const url = `http://${ipv4}:${port}/user/${userId}/getOrders`;
+    const url = `http://${ipv4}:${port}/user/${currentUser.cart.id}/getOrders`;
     fetch(url)
       .then((res) => res.json())
       .then((resData) => {
         setDataSource(resData);
       })
       .catch((err) => console.log(err));
-  }, [dataSource]);
+  }, [currentCart.detail]);
 
   const {
     wrapper,
@@ -44,7 +46,7 @@ const OrderHistory = (props) => {
   } = styles;
 
   return (
-    <Animatable.View style={wrapper} animation="fadeInRight">
+    <Animatable.View style={wrapper} animation="fadeInRight" duration={500}>
       <View style={header}>
         <View />
         <TouchableOpacity onPress={goBackToMain}>

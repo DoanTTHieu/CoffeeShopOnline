@@ -6,7 +6,6 @@ import {
 } from "@react-navigation/drawer";
 import React, { Component } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import * as Animatable from "react-native-animatable";
 import { useSelector } from "react-redux";
 import account from "../../assets/icons/account.png";
 import OrdersHistory from "../screens/Menu/OrdersHistory";
@@ -79,11 +78,7 @@ export default class MenuDrawer extends Component {
     const mainJSX = this.state.isLoggedIn ? loggedIn : loggedOut;
 
     return (
-      <Animatable.View
-        style={{ flex: 1 }}
-        animation="fadeInUpBig"
-        duration={2000}
-      >
+      <View style={{ flex: 1 }} animation="fadeInUpBig" duration={2000}>
         <Drawer.Navigator
           drawerContent={(props) => (
             <CustomDrawerContent
@@ -100,7 +95,7 @@ export default class MenuDrawer extends Component {
           <Drawer.Screen name="Home" component={TabNavigator} />
           {mainJSX}
         </Drawer.Navigator>
-      </Animatable.View>
+      </View>
     );
   }
 }

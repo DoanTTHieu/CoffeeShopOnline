@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FlatList, View } from "react-native";
 import Item from "./Item";
 import { ipv4, port } from "../../../constant/constant";
+import * as Animatable from "react-native-animatable";
 
 const Items = (props) => {
   const [dataSource, setDataSource] = useState([]);
@@ -22,7 +23,7 @@ const Items = (props) => {
   // };
 
   return (
-    <View style={{ flex: 1 }}>
+    <Animatable.View style={{ flex: 1 }} animation="fadeInUpBig" duration={500}>
       <FlatList
         data={dataSource}
         numColumns={2}
@@ -31,7 +32,7 @@ const Items = (props) => {
         )}
         keyExtractor={(item, index) => item.id.toString()}
       />
-    </View>
+    </Animatable.View>
   );
 };
 

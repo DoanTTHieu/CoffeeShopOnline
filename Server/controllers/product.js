@@ -108,7 +108,6 @@ module.exports.getAProduct = function (req, res, next) {
       if (product) {
         res.status(200).json(product);
       }
-      next();
     })
     .catch((err) => {
       if (!err.status) statusCode = 500;
