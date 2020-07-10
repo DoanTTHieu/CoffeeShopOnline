@@ -149,7 +149,6 @@ module.exports.addToCart = function (req, res, next) {
           price: product.price,
         }).then((newCartDetail) => res.status(200).json(newCartDetail));
       } else {
-        product;
         res.redirect(
           `/cart/${cartId}/updateQuantity/?productId=${productId}&choice=inc`
         );
