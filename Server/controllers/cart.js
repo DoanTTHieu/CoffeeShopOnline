@@ -106,29 +106,45 @@ module.exports.updateQuantityCartDetail = function (req, res, next) {
   const cartId = req.params.cartId;
   const productId = req.query.productId;
 
-  if (choice === "inc") {
-    CartDetail.findOne({
-      where: {
-        [Op.and]: [
-          {
-            productId: productId,
-          },
-          {
-            cartId: cartId,
-          },
-        ],
-      },
-    }).then((cd) => {
+  CartDetail.findOne({
+    where: {
+      [Op.and]: [
+        {
+          productId: productId,
+        },
+        {
+          cartId: cartId,
+        },
+      ],
+    },
+  })
+    .then((cd) => {
+      let updatedQuantity = cd.dataValues.quantity;
+      if (choice === "inc") {
+        updatedQuantity += 1;
+      } else if (choice === "desc") {
+        updatedQuantity -= 1;
+      } else if (!isNaN(choice)) {
+        updatedQuantity = choice;
+      } else if (choice === "rm") {
+        cd.destroy();
+      }
       return cd
         .update({
-          // price: 100000,
-          quantity: sequelize.literal("quantity+1"),
+          quantity: updatedQuantity,
+        })
+        .then((cd) => {
+          if (cd.dataValues.quantity < 1) {
+            cd.destroy();
+          }
         })
         .then((cd) => {
           res.status(200).json(cd);
         });
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  }
 };
 
 module.exports.pay = function (req, res, next) {

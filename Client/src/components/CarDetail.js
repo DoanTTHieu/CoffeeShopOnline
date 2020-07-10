@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import {
   Dimensions,
   Image,
@@ -8,6 +8,10 @@ import {
   View,
   Text,
 } from "react-native";
+import { useSelector } from "react-redux";
+
+import { ipv4, port } from "../constant/constant";
+import { changeUser } from "../store/actions/users";
 
 const toTitleCase = (str) => {
   return str.replace(
@@ -29,6 +33,47 @@ const CartDetail = (props) => {
     showDetailContainer,
   } = styles;
 
+  const [trigger, setTrigger] = useState(false);
+
+  const currentUser = useSelector((state) => state.users);
+
+  const dispatch = useDispatch();
+
+  const updateQuantity = useCallback((choice) => {
+    const currentCart = { ...currentUser.cart };
+    currentCart.detail.forEach((item) => {
+      if (item.id !== props.item.id) return;
+      if (choice === "inc") {
+        item.quantity += 1;
+      } else if (choice === "desc") {
+        item.quantity -= 1;
+      } else if (!isNaN(choice) && choice > 0) {
+        item.quantity = choice;
+      } else if (choice === "rm") {
+        item.quantity = 0;
+      }
+    });
+
+    for (let i = 0; i < currentCart.detail.length; i++) {
+      if (currentCart.detail[i].quantity <= 0) {
+        currentCart.detail.splice(i, 1);
+      }
+    }
+    dispatch(changeUser(currentUser.username, currentCart));
+  });
+
+  const updateQuantityHandler = (choice) => {
+    const url = `http://${ipv4}:${port}/cart/${currentUser.cart.id}/updateQuantity/?productId=${props.item.id}&choice=${choice}`;
+    fetch(url)
+      .then(() => {
+        updateQuantity(choice);
+      })
+      .then((detail) => {
+        setTrigger(!trigger);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <View style={product} key={Math.random()}>
       <Image source={props.item.imageUrl} style={productImage} />
@@ -40,7 +85,7 @@ const CartDetail = (props) => {
           }}
         >
           <Text style={txtName}>{toTitleCase("Name of product")}</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => updateQuantityHandler("rm")}>
             <Text style={{ color: "#969696" }}>X</Text>
           </TouchableOpacity>
         </View>
@@ -49,11 +94,19 @@ const CartDetail = (props) => {
         </View>
         <View style={productController}>
           <View style={numberOfProduct}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                updateQuantityHandler("inc");
+              }}
+            >
               <Text>+</Text>
             </TouchableOpacity>
             <Text>{props.item.quantity}</Text>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                updateQuantityHandler("desc");
+              }}
+            >
               <Text>-</Text>
             </TouchableOpacity>
           </View>
