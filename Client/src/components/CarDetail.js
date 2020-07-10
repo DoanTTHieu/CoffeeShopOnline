@@ -7,18 +7,19 @@ import {
   TouchableOpacity,
   View,
   Text,
+  TextInput
 } from "react-native";
 import { useSelector } from "react-redux";
 
 import { ipv4, port } from "../constant/constant";
 import { changeUser } from "../store/actions/users";
 
-const toTitleCase = (str) => {
-  return str.replace(
-    /\w\S*/g,
-    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-  );
-};
+  // const toTitleCase = (str) => {
+  //   return str.replace(
+  //     /\w\S*/g,
+  //     (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  //   );
+  // };
 
 const CartDetail = (props) => {
   const {
@@ -31,7 +32,10 @@ const CartDetail = (props) => {
     numberOfProduct,
     txtShowDetail,
     showDetailContainer,
+    QuantityStyle,
+    QuantityInput
   } = styles;
+//  const [value, onChangeText] = React.useState(props.item.quantity);
 
   const [trigger, setTrigger] = useState(false);
 
@@ -90,7 +94,7 @@ const CartDetail = (props) => {
           </TouchableOpacity>
         </View>
         <View>
-          <Text style={txtPrice}>{props.item.price} DONG</Text>
+          <Text style={txtPrice}>{props.item.price} Dong</Text>
         </View>
         <View style={productController}>
           <View style={numberOfProduct}>
@@ -101,6 +105,15 @@ const CartDetail = (props) => {
             >
               <Text>+</Text>
             </TouchableOpacity>
+            <View style={QuantityStyle}>
+              <TextInput
+                //set quantity
+                //onChangeText={text => onChangeText(text)}
+                style={QuantityInput}
+                keyboardType={'numeric'}
+              />
+            </View>
+            <TouchableOpacity>
             <Text>{props.item.quantity}</Text>
             <TouchableOpacity
               onPress={() => {
@@ -180,4 +193,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
   },
+  QuantityInput: {
+    textAlign: 'center',
+    width: 40,
+    borderRadius: 5
+  },
+  QuantityStyle:{
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: "#C21C70"
+  }
+
 });
