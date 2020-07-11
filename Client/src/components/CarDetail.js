@@ -9,17 +9,11 @@ import {
   Text,
   TextInput,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
 import { ipv4, port } from "../constant/constant";
 import { changeUser } from "../store/actions/users";
-
-const toTitleCase = (str) => {
-  return str.replace(
-    /\w\S*/g,
-    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-  );
-};
 
 const CartDetail = (props) => {
   const {
@@ -32,10 +26,7 @@ const CartDetail = (props) => {
     numberOfProduct,
     txtShowDetail,
     showDetailContainer,
-    QuantityStyle,
-    QuantityInput,
   } = styles;
-  //  const [value, onChangeText] = React.useState(props.item.quantity);
 
   const [trigger, setTrigger] = useState(false);
 
@@ -88,7 +79,7 @@ const CartDetail = (props) => {
             flexDirection: "row",
           }}
         >
-          <Text style={txtName}>{toTitleCase("Name of product")}</Text>
+          <Text style={txtName}>{props.item.title}</Text>
           <TouchableOpacity onPress={() => updateQuantityHandler("rm")}>
             <Text style={{ color: "#969696" }}>X</Text>
           </TouchableOpacity>
@@ -98,30 +89,16 @@ const CartDetail = (props) => {
         </View>
         <View style={productController}>
           <View style={numberOfProduct}>
-            <TouchableOpacity
-              onPress={() => {
-                updateQuantityHandler("inc");
-              }}
-            >
-              <Text>+</Text>
+            <TouchableOpacity onPress={() => {
+                updateQuantityHandler("desc");
+              }}>
+              <Ionicons name="ios-remove-circle" size={25} color={"#f7c744"} />
             </TouchableOpacity>
-            <View style={QuantityStyle}>
-              <TextInput
-                //set quantity
-                //onChangeText={text => onChangeText(text)}
-                style={QuantityInput}
-                keyboardType={"numeric"}
-              />
-            </View>
-            <TouchableOpacity>
-              <Text>{props.item.quantity}</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  updateQuantityHandler("desc");
-                }}
-              >
-                <Text>-</Text>
-              </TouchableOpacity>
+            <Text style={{ paddingHorizontal: 8, fontWeight: 'bold', fontSize: 18 }}>{props.item.quantity}</Text>
+            <TouchableOpacity  onPress={() => {
+                  updateQuantityHandler("inc");
+                }}>
+              <Ionicons name="ios-add-circle" size={25} color={"#f7c744"} />
             </TouchableOpacity>
             <TouchableOpacity
               style={showDetailContainer}
@@ -162,6 +139,7 @@ const styles = StyleSheet.create({
   mainRight: {
     flex: 3,
     justifyContent: "space-between",
+    marginLeft: 20
   },
   productController: {
     flexDirection: "row",
@@ -193,16 +171,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "flex-end",
+    marginTop: 10
   },
-  QuantityInput: {
-    textAlign: "center",
-    width: 100,
-    height: 30,
-    borderRadius: 5,
-  },
-  QuantityStyle: {
-    borderWidth: 1,
-    borderRadius: 3,
-    borderColor: "#C21C70",
-  },
+
 });
