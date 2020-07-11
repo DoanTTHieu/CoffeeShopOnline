@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     width: width / 2 - 20,
     height: width / 2 - 20,
     borderRadius: 5,
+    //resizeMode: "stretch"
   },
   price: {
     color: "#0733ba",

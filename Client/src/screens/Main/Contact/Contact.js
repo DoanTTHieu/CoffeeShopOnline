@@ -113,11 +113,4 @@ const styles = StyleSheet.create({
 });
 
 export default Contact;
-// import React, { Component } from 'react';
-// import { Text } from 'react-native';
 
-// export default class ContactScreen extends Component {
-//     render() {
-//         return <Text>Contactdddd</Text>;
-//     }
-// }

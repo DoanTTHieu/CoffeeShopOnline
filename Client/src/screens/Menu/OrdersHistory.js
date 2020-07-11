@@ -86,11 +86,19 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     flexDirection: "row",
     paddingHorizontal: 10,
-  }, // eslint-disable-line
-  headerTitle: { color: "#203546", fontSize: 20 },
-  //headerTitle: { fontFamily: 'Avenir', color: '#203546', fontSize: 20 },
-  backIconStyle: { width: 30, height: 30 },
-  body: { flex: 10, backgroundColor: "#F6F6F6" },
+  }, 
+  headerTitle: { 
+    color: "#203546", 
+    fontSize: 20 
+  },
+  backIconStyle: { 
+    width: 30, 
+    height: 30 
+  },
+  body: { 
+    flex: 10, 
+    backgroundColor: "#F6F6F6" 
+  },
 });
 
 export default OrderHistory;

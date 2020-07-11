@@ -17,7 +17,7 @@ export default class ProductsView extends React.Component {
         {/* <View style={styles.specialProducts}>
           <SpecialProducts navigation={this.props.navigation} />
         </View> */}
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, marginTop: 10 }}>
           <Items
             navigation={this.props.navigation}
             onSelect={() => {
