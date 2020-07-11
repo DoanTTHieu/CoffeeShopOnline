@@ -76,7 +76,6 @@ const ProductDetail = (props) => {
     textMain,
     titleContainer,
     descContainer,
-    productImageStyle,
     descStyle,
     button,
     buttonText,
@@ -138,25 +137,18 @@ const styles = StyleSheet.create({
   footer: {
     flex: 6,
     backgroundColor: "white",
-    justifyContent: "center",
+    //justifyContent: "",
     alignItems: "flex-end",
-  },
-  cartStyle: {
-    width: 40,
-    height: 40,
   },
   backStyle: {
     width: 30,
     height: 30,
   },
-  productStyle: {
-    width: width / 2,
-    height: width / 2,
-  },
   imageContainer: {
     margin: 10, 
     marginRight: 10, 
-    marginBottom: 10
+    marginBottom: 10,
+    alignItems: "center"
   },
   textMain: {
     paddingLeft: 20,
@@ -173,7 +165,7 @@ const styles = StyleSheet.create({
   },
   textHighlight: {
     fontSize: 20,
-    color: "#7D59C8",
+    color: "#f7c744",
   },
   titleContainer: {
     borderBottomWidth: 1,
@@ -185,22 +177,12 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingTop: 10,
     paddingHorizontal: 10,
+    height: width/4,
+    width: width-20
+
   },
   descStyle: {
     color: "#AFAFAF",
-  },
-  linkStyle: {
-    color: "#7D59C8",
-  },
-  productImageStyle: {
-    width: swiperWidth,
-    height: swiperHeight,
-    marginHorizontal: 5,
-  },
-  mainRight: {
-    justifyContent: "space-between",
-    alignSelf: "stretch",
-    paddingLeft: 20,
   },
   button: {
     backgroundColor: "#f7c744",
@@ -216,7 +198,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   image: {
-    height: width, 
-    width: width-20
+    height: width/1.5, 
+    width: width/1.5
   }
 });
