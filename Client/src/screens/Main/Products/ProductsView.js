@@ -17,7 +17,7 @@ export default class ProductsView extends React.Component {
         {/* <View style={styles.specialProducts}>
           <SpecialProducts navigation={this.props.navigation} />
         </View> */}
-        <View style={{ ...styles.item, marginTop: 20 }}>
+        <View style={{ flex: 1, marginTop: 10 }}>
           <Items
             navigation={this.props.navigation}
             onSelect={() => {
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 0,
     //alignItems: "center",
+    backgroundColor: "#DFDFDF"
   },
   header: {},
   specialProducts: {
@@ -44,9 +45,5 @@ const styles = StyleSheet.create({
     borderColor: "#f7c744",
     //width: width * 0.85 + imageBorder * 2,
     height: height * 0.3 + imageBorder * 2,
-  },
-  item: {
-    //width: width * 0.85 + imageBorder * 2,
-    flex: 1,
   },
 });

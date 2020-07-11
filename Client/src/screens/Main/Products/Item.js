@@ -34,12 +34,11 @@ const Item = (props) => {
     >
       <View style={styles.item}>
         <View>
-          {/* <Image
+          <Image
             style={imageStyle}
             source={{ uri: item.imageUrl }}
-            keyExtractor={item.id}
-          /> */}
-          <View style={imageStyle}></View>
+            //keyExtractor={item.id}
+          />
         </View>
         <View style={styles.content}>
           <Text style={name}>{item.title}</Text>
@@ -80,6 +79,7 @@ const styles = StyleSheet.create({
     width: width / 2 - 20,
     height: width / 2 - 20,
     borderRadius: 5,
+    //resizeMode: "stretch"
   },
   price: {
     color: "#0733ba",

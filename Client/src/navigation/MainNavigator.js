@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import MenuNavigator from "./MenuNavigator";
 import ProductDetail from "../screens/Main/Products/ProductDetail";
-
+import Search from "../screens/Main/Search/Search";
 const Stack = createStackNavigator();
 
 export default class MainScreen extends Component {
@@ -19,6 +19,11 @@ export default class MainScreen extends Component {
           component={MenuNavigator}
           options={{ headerShown: false }}
           navigation={this.props.navigation}
+        />
+        <Stack.Screen
+          name="SearchScreen"
+          component={Search}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     );
