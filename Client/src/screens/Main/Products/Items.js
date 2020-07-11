@@ -30,7 +30,7 @@ const Items = (props) => {
         renderItem={({ item }) => (
           <Item item={item} id={props.id} onSelect={props.onSelect} />
         )}
-        keyExtractor={(item, index) => item.id.toString()}
+        //keyExtractor={(item, index) => item.id.toString()}
       />
     </Animatable.View>
   );
