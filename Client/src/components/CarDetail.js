@@ -89,23 +89,31 @@ const CartDetail = (props) => {
         </View>
         <View style={productController}>
           <View style={numberOfProduct}>
-            <TouchableOpacity onPress={() => {
+            <View>
+              <TouchableOpacity onPress={() => {
                 updateQuantityHandler("desc");
               }}>
-              <Ionicons name="ios-remove-circle" size={25} color={"#f7c744"} />
-            </TouchableOpacity>
-            <Text style={{ paddingHorizontal: 8, fontWeight: 'bold', fontSize: 18 }}>{props.item.quantity}</Text>
-            <TouchableOpacity  onPress={() => {
-                  updateQuantityHandler("inc");
-                }}>
-              <Ionicons name="ios-add-circle" size={25} color={"#f7c744"} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={showDetailContainer}
-              onPress={props.onSelect}
-            >
-              <Text style={txtShowDetail}>SHOW DETAILS</Text>
-            </TouchableOpacity>
+                <Ionicons name="ios-remove-circle" size={25} color={"#f7c744"} />
+              </TouchableOpacity>
+            </View>
+            <View>
+              <Text style={{ paddingHorizontal: 8, fontWeight: 'bold', fontSize: 18 }}>{props.item.quantity}</Text>
+            </View>
+            <View>
+              <TouchableOpacity onPress={() => {
+                updateQuantityHandler("inc");
+              }}>
+                <Ionicons name="ios-add-circle" size={25} color={"#f7c744"} />
+              </TouchableOpacity>
+            </View>
+            <View>
+              <TouchableOpacity
+                style={showDetailContainer}
+                onPress={props.onSelect}
+              >
+                <Text style={txtShowDetail}>SHOW DETAILS</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
