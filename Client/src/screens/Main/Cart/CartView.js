@@ -15,7 +15,14 @@ import { ipv4, port } from "../../../constant/constant";
 import { changeUser } from "../../../store/actions/users";
 
 const CartView = (props) => {
-  const { main, checkoutButton, checkoutTitle, wrapper, title, headerTitle } = styles;
+  const {
+    main,
+    checkoutButton,
+    checkoutTitle,
+    wrapper,
+    title,
+    headerTitle,
+  } = styles;
 
   const [pay, setPay] = useState(true);
 
@@ -62,8 +69,8 @@ const CartView = (props) => {
       .then(() => {
         setPay(true);
       })
-      .catch((err) => () => {
-        console.log("hello");
+      .catch((err) => {
+        console.log(err);
       });
   }, [pay]);
 
@@ -124,5 +131,5 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#f7c744",
   },
-    headerTitle: { color: "#203546", fontSize: 20 },
+  headerTitle: { color: "#203546", fontSize: 20 },
 });

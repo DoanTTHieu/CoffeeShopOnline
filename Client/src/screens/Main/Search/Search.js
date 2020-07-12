@@ -1,44 +1,59 @@
-import React, { Component } from "react";
+import React, { useEffect, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import {
   View,
-  Text,
   StyleSheet,
   Image,
   Dimensions,
   TouchableOpacity,
-  TextInput
+  TextInput,
 } from "react-native";
+
 import backSpecial from "../../../../assets/icons/down.png";
+import Items from "../Products/Items";
+import { searchKeys } from "../../../store/actions/keys";
 
-class Search extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const {
-      header,
-      headerTitle,
-      backIconStyle,
-      searchBox
-    } = styles;
+export default (props) => {
+  const { header, backIconStyle, searchBox } = styles;
 
-    return (
-      <View >
-        <View style={header}>
-          <TouchableOpacity onPress={this.props.navigation.goBack}>
+  const dispatch = useDispatch();
+
+  const getSearchKeys = useCallback(
+    (keys) => {
+      dispatch(searchKeys(keys));
+    },
+    [dispatch]
+  );
+
+  return (
+    <View>
+      <View style={header}>
+        <View style={{ flex: 2 }}>
+          <TouchableOpacity onPress={props.navigation.goBack}>
             <Image source={backSpecial} style={backIconStyle} />
           </TouchableOpacity>
           <View>
-            <TextInput style={searchBox} placeholder="SEARCH" />
+            <TextInput
+              style={searchBox}
+              placeholder="SEARCH"
+              onChangeText={(val) => getSearchKeys(val)}
+            />
           </View>
         </View>
-        <View>
-
+        <View style={{ flex: 8, marginTop: 10 }}>
+          <Items
+            navigation={props.navigation}
+            onSelect={() => {
+              props.navigation.navigate("ProductDetail");
+            }}
+            filter={true}
+          />
         </View>
       </View>
-    );
-  }
-}
+      <View></View>
+    </View>
+  );
+};
 const { width, height } = Dimensions.get("window");
 const styles = StyleSheet.create({
   header: {
@@ -48,15 +63,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     flexDirection: "row",
     paddingTop: "2%",
-    paddingBottom: "1%"
+    paddingBottom: "1%",
   },
   headerTitle: {
     color: "#203546",
-    fontSize: 20
+    fontSize: 20,
   },
   backIconStyle: {
     width: 30,
-    height: 30
+    height: 30,
   },
   searchBox: {
     height: height / 25,
@@ -65,5 +80,3 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
 });
-
-export default Search;

@@ -23,6 +23,7 @@ export default class ProductsView extends React.Component {
             onSelect={() => {
               this.props.navigation.navigate("ProductDetail");
             }}
+            filter={false}
           />
         </View>
       </View>
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 0,
     //alignItems: "center",
-    backgroundColor: "#DFDFDF"
+    backgroundColor: "#DFDFDF",
   },
   header: {},
   specialProducts: {

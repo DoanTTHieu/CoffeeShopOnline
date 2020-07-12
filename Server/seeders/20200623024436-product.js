@@ -6,35 +6,134 @@ module.exports = {
       "Product",
       [
         {
-          title: "Cappuccino",
+          title: "Americano",
           available: true,
-          description: "Amazing",
+          description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
           type: "Coffee",
           price: 30000,
           imageUrl:
-            "https://upload.wikimedia.org/wikipedia/commons/c/c8/Cappuccino_at_Sightglass_Coffee.jpg",
+            "https://see.news/wp-content/uploads/2018/10/a-woman-holding-a-cup-of-coffee.jpg",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          title: "Cookie",
-          available: false,
-          description: "Wonderful",
-          type: "coffee",
+          title: "Cappuccino",
+          available: true,
+          description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          type: "Coffee",
+          price: 33000,
+          imageUrl:
+            "https://see.news/wp-content/uploads/2018/10/a-woman-holding-a-cup-of-coffee.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          title: "Macchiato",
+          available: true,
+          description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          type: "Coffee",
           price: 35000,
           imageUrl:
-            "https://www.simplystacie.net/wp-content/uploads/2016/06/choc-chip-cookie-coffee-4-1.jpg",
+            "https://see.news/wp-content/uploads/2018/10/a-woman-holding-a-cup-of-coffee.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          title: "Express",
+          available: true,
+          description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          type: "Coffee",
+          price: 30000,
+          imageUrl:
+            "https://see.news/wp-content/uploads/2018/10/a-woman-holding-a-cup-of-coffee.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          title: "Mocha",
+          available: true,
+          description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          type: "Coffee",
+          price: 38000,
+          imageUrl:
+            "https://see.news/wp-content/uploads/2018/10/a-woman-holding-a-cup-of-coffee.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          title: "Hot chocolate",
+          available: true,
+          description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          type: "Hot drink",
+          price: 40000,
+          imageUrl:
+            "https://see.news/wp-content/uploads/2018/10/a-woman-holding-a-cup-of-coffee.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          title: "White chocolate",
+          available: true,
+          description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          type: "Hot drink",
+          price: 36000,
+          imageUrl:
+            "https://see.news/wp-content/uploads/2018/10/a-woman-holding-a-cup-of-coffee.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          title: "Green tea",
+          available: true,
+          description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          type: "Hot drink",
+          price: 30000,
+          imageUrl:
+            "https://see.news/wp-content/uploads/2018/10/a-woman-holding-a-cup-of-coffee.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          title: "Vanilla",
+          available: true,
+          description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          type: "Ice blended",
+          price: 33000,
+          imageUrl:
+            "https://see.news/wp-content/uploads/2018/10/a-woman-holding-a-cup-of-coffee.jpg",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          title: "Caramel",
+          available: true,
+          description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          type: "Ice blended",
+          price: 32000,
+          imageUrl:
+            "https://see.news/wp-content/uploads/2018/10/a-woman-holding-a-cup-of-coffee.jpg",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           title: "Oreo",
           available: true,
-          description: "Wonderful",
-          type: "coffee",
-          price: 38000,
+          description:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          type: "Ice blended",
+          price: 32000,
           imageUrl:
-            "https://img.food.boxspace.in/image/rbk_5bc71622d61e4/xhdpi.jpg",
+            "https://see.news/wp-content/uploads/2018/10/a-woman-holding-a-cup-of-coffee.jpg",
           createdAt: new Date(),
           updatedAt: new Date(),
         },

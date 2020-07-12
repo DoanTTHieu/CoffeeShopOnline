@@ -13,7 +13,6 @@ import { ipv4, port } from "../../../constant/constant";
 import { changeUser } from "../../../store/actions/users";
 
 const backIcon = require("../../../../assets/icons/blackback.png");
-const picture = require("../../../../assets/items/capuchino.jpg");
 
 const ProductDetail = (props) => {
   const selectedItem = useSelector((state) => state.items.selectedItem);
@@ -79,7 +78,7 @@ const ProductDetail = (props) => {
     descStyle,
     button,
     buttonText,
-    image
+    image,
   } = styles;
 
   return (
@@ -90,18 +89,18 @@ const ProductDetail = (props) => {
         </TouchableOpacity>
       </View>
       <View style={imageContainer}>
-        <Image source={picture} style={image}/>
+        <Image source={{ uri: selectedItem.imageUrl }} style={image} />
       </View>
       <View style={footer}>
         <View style={titleContainer}>
           <Text style={textMain}>
-            <Text style={textBlack}>name of product</Text>
+            <Text style={textBlack}>{selectedItem.title}</Text>
             <Text style={textHighlight}> / </Text>
-            <Text style={textSmoke}>100$</Text>
+            <Text style={textSmoke}>{selectedItem.price} dong</Text>
           </Text>
         </View>
         <View style={descContainer}>
-          <Text style={descStyle}>description of product</Text>
+          <Text style={descStyle}>{selectedItem.description}</Text>
         </View>
         <TouchableOpacity style={button} onPress={addToCartHandler}>
           <Text style={buttonText}>ADD TO CART</Text>
@@ -145,10 +144,10 @@ const styles = StyleSheet.create({
     height: 30,
   },
   imageContainer: {
-    margin: 10, 
-    marginRight: 10, 
+    margin: 10,
+    marginRight: 10,
     marginBottom: 10,
-    alignItems: "center"
+    alignItems: "center",
   },
   textMain: {
     paddingLeft: 20,
@@ -177,9 +176,8 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingTop: 10,
     paddingHorizontal: 10,
-    height: width/4,
-    width: width-20
-
+    height: width / 4,
+    width: width - 20,
   },
   descStyle: {
     color: "#AFAFAF",
@@ -198,7 +196,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   image: {
-    height: width/1.5, 
-    width: width/1.5
-  }
+    height: width / 1.5,
+    width: width / 1.5,
+  },
 });

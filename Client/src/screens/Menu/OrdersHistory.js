@@ -68,7 +68,7 @@ const OrderHistory = (props) => {
               userId={item.userId}
             ></Order>
           )}
-          keyExtractor={(item, index) => item.id}
+          keyExtractor={(item, index) => item.id.toString()}
         />
       </View>
     </Animatable.View>
@@ -86,18 +86,18 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     flexDirection: "row",
     paddingHorizontal: 10,
-  }, 
-  headerTitle: { 
-    color: "#203546", 
-    fontSize: 20 
   },
-  backIconStyle: { 
-    width: 30, 
-    height: 30 
+  headerTitle: {
+    color: "#203546",
+    fontSize: 20,
   },
-  body: { 
-    flex: 10, 
-    backgroundColor: "#F6F6F6" 
+  backIconStyle: {
+    width: 30,
+    height: 30,
+  },
+  body: {
+    flex: 10,
+    backgroundColor: "#F6F6F6",
   },
 });
 

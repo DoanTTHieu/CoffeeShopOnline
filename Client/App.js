@@ -7,13 +7,14 @@ import { Provider } from "react-redux";
 import LoginNavigator from "./src/navigation/LoginHomeNavigator";
 import usersReducer from "./src/store/reducers/users";
 import itemsReducer from "./src/store/reducers/items";
-import itemReducer from "./src/store/reducers/items";
+import keysReducer from "./src/store/reducers/keys";
 
 StatusBar.setHidden(true);
 
 const rootReducer = combineReducers({
   users: usersReducer,
-  items: itemReducer,
+  items: itemsReducer,
+  keys: keysReducer,
 });
 
 const store = createStore(rootReducer);

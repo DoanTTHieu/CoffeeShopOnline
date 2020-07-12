@@ -71,7 +71,7 @@ const CartDetail = (props) => {
 
   return (
     <View style={product} key={Math.random()}>
-      <Image source={props.item.imageUrl} style={productImage} />
+      <Image source={{ uri: props.item.imageUrl }} style={productImage} />
       <View style={mainRight}>
         <View
           style={{
@@ -90,19 +90,35 @@ const CartDetail = (props) => {
         <View style={productController}>
           <View style={numberOfProduct}>
             <View>
-              <TouchableOpacity onPress={() => {
-                updateQuantityHandler("desc");
-              }}>
-                <Ionicons name="ios-remove-circle" size={25} color={"#f7c744"} />
+              <TouchableOpacity
+                onPress={() => {
+                  updateQuantityHandler("desc");
+                }}
+              >
+                <Ionicons
+                  name="ios-remove-circle"
+                  size={25}
+                  color={"#f7c744"}
+                />
               </TouchableOpacity>
             </View>
             <View>
-              <Text style={{ paddingHorizontal: 8, fontWeight: 'bold', fontSize: 18 }}>{props.item.quantity}</Text>
+              <Text
+                style={{
+                  paddingHorizontal: 8,
+                  fontWeight: "bold",
+                  fontSize: 18,
+                }}
+              >
+                {props.item.quantity}
+              </Text>
             </View>
             <View>
-              <TouchableOpacity onPress={() => {
-                updateQuantityHandler("inc");
-              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  updateQuantityHandler("inc");
+                }}
+              >
                 <Ionicons name="ios-add-circle" size={25} color={"#f7c744"} />
               </TouchableOpacity>
             </View>
@@ -147,7 +163,7 @@ const styles = StyleSheet.create({
   mainRight: {
     flex: 3,
     justifyContent: "space-between",
-    marginLeft: 20
+    marginLeft: 20,
   },
   productController: {
     flexDirection: "row",
@@ -179,7 +195,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "flex-end",
-    marginTop: 10
+    marginTop: 10,
   },
-
 });

@@ -34,11 +34,7 @@ const Item = (props) => {
     >
       <View style={styles.item}>
         <View>
-          <Image
-            style={imageStyle}
-            source={{ uri: item.imageUrl }}
-            //keyExtractor={item.id}
-          />
+          <Image style={imageStyle} source={{ uri: item.imageUrl }} />
         </View>
         <View style={styles.content}>
           <Text style={name}>{item.title}</Text>
@@ -56,7 +52,6 @@ const styles = StyleSheet.create({
     width: width / 2 - 10,
     //flexGrow: 1,
     backgroundColor: "#f7c744",
-    padding: 5,
     marginLeft: 5,
     marginRight: 5,
     marginVertical: 5,
@@ -76,7 +71,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageStyle: {
-    width: width / 2 - 20,
+    width: width / 2 - 10,
     height: width / 2 - 20,
     borderRadius: 5,
     //resizeMode: "stretch"

@@ -160,7 +160,7 @@ module.exports.addToCart = function (req, res, next) {
 
 ///////////////////////////
 module.exports.searchProducts = function (req, res, next) {
-  const productInfo = req.body.info; // {p: 'The'}
+  const productInfo = req.query.v; // {p: 'The'}
   Product.findAll({
     where: {
       [Op.or]: [
@@ -174,10 +174,17 @@ module.exports.searchProducts = function (req, res, next) {
             [Op.substring]: productInfo,
           },
         },
+        {
+          type: {
+            [Op.substring]: productInfo,
+          },
+        },
       ],
     },
   })
-    .then((product) => res.status(200).json(product))
+    .then((product) => {
+      res.status(200).json(product);
+    })
     .catch((err) => {
       if (!err.status) err.statusCode = 500;
       next(err);
@@ -240,6 +247,23 @@ module.exports.filterByPrice = (req, res, next) => {
     },
   })
     .then((products) => res.status(200).json(products))
+    .catch((err) => {
+      if (!err.status) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+module.exports.filterByType = (req, res, next) => {
+  const productType = req.body.type;
+
+  Product.findAll({
+    where: {
+      type: productType,
+    },
+  })
+    .then((order) => res.status(200).json(order))
     .catch((err) => {
       if (!err.status) {
         err.statusCode = 500;
