@@ -9,7 +9,6 @@ import {
   Text,
 } from "react-native";
 
-import Header from "../../../components/Header";
 import CartDetail from "../../../components/CarDetail";
 import { ipv4, port } from "../../../constant/constant";
 import { changeUser } from "../../../store/actions/users";
@@ -95,7 +94,7 @@ const CartView = (props) => {
         ))}
       </ScrollView>
       <TouchableOpacity style={checkoutButton} onPress={payHandler}>
-        <Text style={checkoutTitle}>TOTAL {1000}$ CHECKOUT NOW</Text>
+        <Text style={checkoutTitle}>TOTAL {100000}đ CHECKOUT NOW</Text>
       </TouchableOpacity>
     </View>
   );
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    height: 50,
+    height: 40,
     backgroundColor: "#f7c744",
   },
   headerTitle: { color: "#203546", fontSize: 20 },

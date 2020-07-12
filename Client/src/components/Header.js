@@ -48,7 +48,7 @@ export default class Header extends Component {
 const styles = StyleSheet.create({
     header: {
         backgroundColor: "#f7c744",
-        height: height / 17,
+        height: 40,
         justifyContent: "space-between",
         flexDirection: "row",
         padding: 10,

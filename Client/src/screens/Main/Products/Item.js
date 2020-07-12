@@ -38,7 +38,7 @@ const Item = (props) => {
         </View>
         <View style={styles.content}>
           <Text style={name}>{item.title}</Text>
-          <Text style={price}>${item.price}</Text>
+          <Text style={price}>{item.price}đ</Text>
         </View>
       </View>
     </TouchableOpacity>

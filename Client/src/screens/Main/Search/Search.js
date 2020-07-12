@@ -28,29 +28,29 @@ export default (props) => {
   return (
     <View>
       <View style={header}>
-        <View style={{ flex: 2 }}>
+        <View>
           <TouchableOpacity onPress={props.navigation.goBack}>
             <Image source={backSpecial} style={backIconStyle} />
           </TouchableOpacity>
-          <View>
-            <TextInput
-              style={searchBox}
-              placeholder="SEARCH"
-              onChangeText={(val) => getSearchKeys(val)}
-            />
-          </View>
         </View>
-        <View style={{ flex: 8, marginTop: 10 }}>
-          <Items
-            navigation={props.navigation}
-            onSelect={() => {
-              props.navigation.navigate("ProductDetail");
-            }}
-            filter={true}
+        <View>
+          <TextInput
+            style={searchBox}
+            placeholder="SEARCH"
+            onChangeText={(val) => getSearchKeys(val)}
           />
         </View>
       </View>
-      <View></View>
+
+      <View style={{ marginTop: 10 }}>
+        <Items
+          navigation={props.navigation}
+          onSelect={() => {
+            props.navigation.navigate("ProductDetail");
+          }}
+          filter={true}
+        />
+      </View>
     </View>
   );
 };
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   searchBox: {
     height: height / 25,
-    width: width * 0.9,
+    width: width * 0.8,
     backgroundColor: "#FFF",
     paddingLeft: 5,
   },
