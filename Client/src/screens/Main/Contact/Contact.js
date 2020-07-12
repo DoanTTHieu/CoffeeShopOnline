@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   title:{
-    height: 50,
+    height: 40,
     backgroundColor: "#f7c744",
   },
     headerTitle: { color: "#203546", fontSize: 20 },

@@ -24,8 +24,6 @@ const CartDetail = (props) => {
     txtPrice,
     productImage,
     numberOfProduct,
-    txtShowDetail,
-    showDetailContainer,
   } = styles;
 
   const [trigger, setTrigger] = useState(false);
@@ -85,7 +83,7 @@ const CartDetail = (props) => {
           </TouchableOpacity>
         </View>
         <View>
-          <Text style={txtPrice}>{props.item.price} Dong</Text>
+          <Text style={txtPrice}>{props.item.price} đ</Text>
         </View>
         <View style={productController}>
           <View style={numberOfProduct}>
@@ -120,14 +118,6 @@ const CartDetail = (props) => {
                 }}
               >
                 <Ionicons name="ios-add-circle" size={25} color={"#f7c744"} />
-              </TouchableOpacity>
-            </View>
-            <View>
-              <TouchableOpacity
-                style={showDetailContainer}
-                onPress={props.onSelect}
-              >
-                <Text style={txtShowDetail}>SHOW DETAILS</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -184,17 +174,5 @@ const styles = StyleSheet.create({
     color: "#C21C70",
     fontSize: 20,
     fontWeight: "400",
-  },
-  txtShowDetail: {
-    color: "#C21C70",
-    fontSize: 10,
-    fontWeight: "400",
-    textAlign: "right",
-  },
-  showDetailContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    marginTop: 10,
   },
 });
