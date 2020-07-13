@@ -29,7 +29,7 @@ const CartView = (props) => {
 
   const cartId = useSelector((state) => state.users.cart.id);
 
-  const products = useSelector((state) => state.users.cart.detail);
+  const productsInCart = useSelector((state) => state.users.cart.detail);
 
   const dispatch = useDispatch();
 
@@ -59,7 +59,7 @@ const CartView = (props) => {
       },
       body: JSON.stringify({
         userId: cartId,
-        products: products,
+        productsInCart: productsInCart,
       }),
     })
       .then(() => {
@@ -83,7 +83,7 @@ const CartView = (props) => {
         </View>
       </View>
       <ScrollView style={main}>
-        {useSelector((state) => state.users.cart.detail).map((item) => (
+        {productsInCart.map((item) => (
           <CartDetail
             item={item}
             onSelect={() => {
@@ -94,7 +94,10 @@ const CartView = (props) => {
         ))}
       </ScrollView>
       <TouchableOpacity style={checkoutButton} onPress={payHandler}>
-        <Text style={checkoutTitle}>TOTAL {100000}đ CHECKOUT NOW</Text>
+        <Text style={checkoutTitle}>
+          TOTAL {productsInCart.reduce((a, b) => a + b.price * b.quantity, 0)}
+          dong CHECKOUT NOW
+        </Text>
       </TouchableOpacity>
     </View>
   );

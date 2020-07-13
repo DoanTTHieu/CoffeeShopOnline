@@ -89,20 +89,12 @@ module.exports.addOrder = function (req, res, next) {
     orderDate: new Date(),
   })
     .then((order) => {
-      req.body.products.forEach((item) => {
-        Product.findOne({
-          where: { id: item.id },
-        }).then((product) => {
-          if (!product) {
-            return res.status(400);
-          }
-
-          OrderDetail.create({
-            orderId: order.id,
-            productId: item.id,
-            quantity: item.quantity,
-            price: product.price,
-          });
+      req.body.productsInCart.forEach((item) => {
+        OrderDetail.create({
+          orderId: order.id,
+          productId: item.productId,
+          quantity: item.quantity,
+          price: item.price,
         });
       });
       return res.status(200).json(order);
@@ -153,4 +145,15 @@ module.exports.getAnOrder = function (req, res, next) {
       if (!err.status) statusCode = 500;
       next(err);
     });
+};
+
+module.exports.getTotal = function (req, res, next) {
+  const orderId = req.params.id;
+  OrderDetail.findAll({
+    where: {
+      orderId: orderId,
+    },
+  }).then((details) => {
+    res.status(200).json(details.reduce((a, b) => a + b.quantity * b.price, 0));
+  });
 };

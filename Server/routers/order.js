@@ -14,4 +14,6 @@ router.get("/:id", orderController.getAnOrder);
 
 router.delete("/delete/:id", orderController.deleteOrder);
 
+router.get("/:id/total", orderController.getTotal);
+
 module.exports = router;

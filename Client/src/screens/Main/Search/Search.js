@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import backSpecial from "../../../../assets/icons/down.png";
+import * as Animatable from "react-native-animatable";
 import Items from "../Products/Items";
 import { searchKeys } from "../../../store/actions/keys";
 
@@ -26,10 +27,15 @@ export default (props) => {
   );
 
   return (
-    <View>
+    <Animatable.View animation="fadeInRight" duration={500}>
       <View style={header}>
         <View>
-          <TouchableOpacity onPress={props.navigation.goBack}>
+          <TouchableOpacity
+            onPress={() => {
+              getSearchKeys("");
+              props.navigation.navigate("MenuNavigator");
+            }}
+          >
             <Image source={backSpecial} style={backIconStyle} />
           </TouchableOpacity>
         </View>
@@ -51,7 +57,7 @@ export default (props) => {
           filter={true}
         />
       </View>
-    </View>
+    </Animatable.View>
   );
 };
 const { width, height } = Dimensions.get("window");

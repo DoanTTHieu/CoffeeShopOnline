@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+import { ipv4, port } from "../constant/constant";
+
 const Order = (props) => {
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const url = `http://${ipv4}:${port}/order/${props.id}/total`;
+    const fetchData = () => {
+      fetch(url)
+        .then((res) => res.json())
+        .then((total) => {
+          setTotal(total);
+        });
+    };
+    fetchData();
+  }, []);
   return (
     <View style={styles.order}>
       <View style={styles.orderLine}>
@@ -15,15 +30,9 @@ const Order = (props) => {
       </View>
 
       <View style={styles.orderLine}>
-        <Text style={styles.propTitle}>User Id:</Text>
-        <Text style={styles.propValue}>{props.userId}</Text>
-      </View>
-
-      <View style={styles.orderLine}>
         <Text style={styles.propTitle}>Total:</Text>
-        <Text style={styles.propPrice}>{props.userId}</Text>
+        <Text style={styles.propPrice}>{total}</Text>
       </View>
-
     </View>
   );
 };
@@ -50,19 +59,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
-  propTitle: { 
-    color: "#9A9A9A", 
-    fontWeight: "bold" 
+  propTitle: {
+    color: "#9A9A9A",
+    fontWeight: "bold",
   },
 
   propValue: {
     color: "#203546",
   },
   propDate: {
-    color: '#C21C70'
+    color: "#C21C70",
   },
   propPrice: {
-    color: '#C21C70',
-    fontWeight: "bold" 
-  }
+    color: "#C21C70",
+    fontWeight: "bold",
+  },
 });

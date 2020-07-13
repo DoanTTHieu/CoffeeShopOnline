@@ -170,11 +170,6 @@ module.exports.searchProducts = function (req, res, next) {
           },
         },
         {
-          description: {
-            [Op.substring]: productInfo,
-          },
-        },
-        {
           type: {
             [Op.substring]: productInfo,
           },
