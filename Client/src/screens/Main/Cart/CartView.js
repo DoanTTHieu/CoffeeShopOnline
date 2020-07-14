@@ -96,7 +96,7 @@ const CartView = (props) => {
       <TouchableOpacity style={checkoutButton} onPress={payHandler}>
         <Text style={checkoutTitle}>
           TOTAL {productsInCart.reduce((a, b) => a + b.price * b.quantity, 0)}
-          dong CHECKOUT NOW
+           đ CHECKOUT NOW
         </Text>
       </TouchableOpacity>
     </View>

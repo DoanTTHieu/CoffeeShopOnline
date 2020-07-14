@@ -9,10 +9,12 @@ import {
   TextInput,
 } from "react-native";
 
-import backSpecial from "../../../../assets/icons/down.png";
+import backSpecial from "../../../../assets/icons/blackback.png";
 import * as Animatable from "react-native-animatable";
 import Items from "../Products/Items";
 import { searchKeys } from "../../../store/actions/keys";
+
+const { width, height } = Dimensions.get("window");
 
 export default (props) => {
   const { header, backIconStyle, searchBox } = styles;
@@ -27,7 +29,7 @@ export default (props) => {
   );
 
   return (
-    <Animatable.View animation="fadeInRight" duration={500}>
+    <Animatable.View duration={500} style={{ flex: 1 }}>
       <View style={header}>
         <View>
           <TouchableOpacity
@@ -48,7 +50,7 @@ export default (props) => {
         </View>
       </View>
 
-      <View style={{ marginTop: 10 }}>
+      <View style={{ marginTop: 10, flex: 1}}>
         <Items
           navigation={props.navigation}
           onSelect={() => {
@@ -60,12 +62,11 @@ export default (props) => {
     </Animatable.View>
   );
 };
-const { width, height } = Dimensions.get("window");
+
 const styles = StyleSheet.create({
   header: {
-    flex: 1,
     backgroundColor: "#f7c744",
-    height: height / 16,
+    height: height/16,
     justifyContent: "space-around",
     flexDirection: "row",
     paddingTop: "2%",

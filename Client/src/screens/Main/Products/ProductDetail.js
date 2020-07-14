@@ -96,7 +96,7 @@ const ProductDetail = (props) => {
           <Text style={textMain}>
             <Text style={textBlack}>{selectedItem.title}</Text>
             <Text style={textHighlight}> / </Text>
-            <Text style={textSmoke}>{selectedItem.price} dong</Text>
+            <Text style={textSmoke}>{selectedItem.price}đ</Text>
           </Text>
         </View>
         <View style={descContainer}>
@@ -113,8 +113,6 @@ const ProductDetail = (props) => {
 export default ProductDetail;
 
 const { width, height } = Dimensions.get("window");
-const swiperWidth = width / 1.5 - 30;
-const swiperHeight = (swiperWidth * 452) / 361;
 
 const styles = StyleSheet.create({
   cardStyle: {
@@ -176,7 +174,7 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingTop: 10,
     paddingHorizontal: 10,
-    height: width / 4,
+    height: height / 5,
     width: width - 20,
   },
   descStyle: {
@@ -196,7 +194,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   image: {
-    height: width / 1.5,
-    width: width / 1.5,
+    height: width -20,
+    width: width -20,
   },
 });

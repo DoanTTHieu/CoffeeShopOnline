@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import menu from "../../assets/icons/menu.png";
-import search from "../../assets/icons/search.svg";
+import search from "../../assets/icons/search.png";
 import {
     View,
     Image,
