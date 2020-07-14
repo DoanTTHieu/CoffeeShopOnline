@@ -13,7 +13,7 @@ import backSpecial from "../../../assets/icons/blackback.png";
 import * as Animatable from "react-native-animatable";
 
 import Order from "../../components/Order";
-import { ipv4, port } from "../../constant/constant";
+import { hostname } from "../../constant/constant";
 
 const OrderHistory = (props) => {
   const [dataSource, setDataSource] = useState([]);
@@ -27,7 +27,7 @@ const OrderHistory = (props) => {
   const currentCart = currentUser.cart;
 
   useEffect(() => {
-    const url = `http://${ipv4}:${port}/user/${currentUser.cart.id}/getOrders`;
+    const url = `http://${hostname}/user/${currentUser.cart.id}/getOrders`;
     fetch(url)
       .then((res) => res.json())
       .then((resData) => {

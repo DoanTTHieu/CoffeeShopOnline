@@ -1,6 +1,7 @@
 const db = require("../models");
 const sequelize = require("sequelize");
 const { body } = require("express-validator");
+
 const Order = db.Order;
 const Product = db.Product;
 const OrderDetail = db.OrderDetail;

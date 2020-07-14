@@ -25,7 +25,7 @@ module.exports.getCartOfUser = function (req, res, next) {
     },
   })
     .then((cart) => {
-      res.redirect(`/cart/${cart.id}/detail`);
+      res.redirect(`/cart/${cart.dataValues.id}/detail`);
     })
     .catch((err) => {
       if (!err.status) {

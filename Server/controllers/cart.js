@@ -2,6 +2,8 @@ const db = require("../models");
 const sequelize = require("sequelize");
 
 const Cart = db.Cart;
+const Order = db.Order;
+const OrderDetail = db.OrderDetail;
 const Product = db.Product;
 const CartDetail = db.CartDetail;
 const Op = sequelize.Op;
@@ -91,7 +93,7 @@ module.exports.getAllCartDetails = function (req, res, next) {
 
   db.sequelize
     .query(
-      `SELECT * FROM cartdetail as cd, product as p WHERE cd.cartId=${cartId} AND cd.productId=p.id`,
+      `SELECT * FROM CartDetail as cd, Product as p WHERE cd.cartId=${cartId} AND cd.productId=p.id`,
       {
         type: sequelize.QueryTypes.SELECT,
       }
@@ -143,7 +145,10 @@ module.exports.updateQuantityCartDetail = function (req, res, next) {
         });
     })
     .catch((err) => {
-      console.log(err);
+      if (!err.status) {
+        err.statusCode = 500;
+      }
+      next(err);
     });
 };
 
@@ -159,7 +164,26 @@ module.exports.pay = function (req, res, next) {
       });
     })
     .then(() => {
-      res.redirect(307, "/order/add");
+      // res.redirect(307, "http://192.168.43.110:3001/order/add");
+      Order.create({
+        userId: req.body.userId,
+        orderDate: new Date(),
+      })
+        .then((order) => {
+          req.body.productsInCart.forEach((item) => {
+            OrderDetail.create({
+              orderId: order.id,
+              productId: item.productId,
+              quantity: item.quantity,
+              price: item.price,
+            });
+          });
+          return res.status(200).json(order);
+        })
+        .catch((err) => {
+          if (!err.status) err.statusCode = 500;
+          next(err);
+        });
     })
     .catch((err) => {
       if (!err.status) err.statusCode = 500;

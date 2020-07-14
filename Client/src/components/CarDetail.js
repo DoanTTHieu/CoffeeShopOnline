@@ -12,7 +12,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
-import { ipv4, port } from "../constant/constant";
+import { hostname } from "../constant/constant";
 import { changeUser } from "../store/actions/users";
 
 const CartDetail = (props) => {
@@ -56,7 +56,7 @@ const CartDetail = (props) => {
   });
 
   const updateQuantityHandler = (choice) => {
-    const url = `http://${ipv4}:${port}/cart/${currentUser.cart.id}/updateQuantity/?productId=${props.item.id}&choice=${choice}`;
+    const url = `http://${hostname}/cart/${currentUser.cart.id}/updateQuantity/?productId=${props.item.id}&choice=${choice}`;
     fetch(url)
       .then(() => {
         updateQuantity(choice);

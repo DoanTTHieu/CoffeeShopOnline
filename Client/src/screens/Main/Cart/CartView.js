@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import CartDetail from "../../../components/CarDetail";
-import { ipv4, port } from "../../../constant/constant";
+import { hostname } from "../../../constant/constant";
 import { changeUser } from "../../../store/actions/users";
 
 const CartView = (props) => {
@@ -50,7 +50,7 @@ const CartView = (props) => {
 
   useEffect(() => {
     if (pay) return;
-    const url = `http://${ipv4}:${port}/cart/${cartId}/pay`;
+    const url = `http://${hostname}/cart/${cartId}/pay`;
 
     fetch(url, {
       method: "POST",
@@ -95,8 +95,8 @@ const CartView = (props) => {
       </ScrollView>
       <TouchableOpacity style={checkoutButton} onPress={payHandler}>
         <Text style={checkoutTitle}>
-          TOTAL {productsInCart.reduce((a, b) => a + b.price * b.quantity, 0)}
-           đ CHECKOUT NOW
+          TOTAL {productsInCart.reduce((a, b) => a + b.price * b.quantity, 0)}đ
+          CHECKOUT NOW
         </Text>
       </TouchableOpacity>
     </View>

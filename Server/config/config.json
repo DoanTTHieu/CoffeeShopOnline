@@ -1,25 +1,25 @@
 {
   "development": {
-    "username": "root",
-    "password": "123456789",
-    "database": "CoffeeShopDB",
-    "host": "127.0.0.1",
+    "username": "kunbrcom_chuong",
+    "password": "TangKhanhChuong@1",
+    "database": "kunbrcom_chuongtinhyeu",
+    "host": "45.252.248.11",
     "dialect": "mysql",
     "operatorsAliases": false
   },
   "test": {
-    "username": "root",
-    "password": "123456789",
-    "database": "CoffeeShopDB_test",
-    "host": "127.0.0.1",
+    "username": "kunbrcom_chuong",
+    "password": "TangKhanhChuong@1",
+    "database": "kunbrcom_chuongtinhyeu",
+    "host": "45.252.248.11",
     "dialect": "mysql",
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
-    "password": "123456789",
-    "database": "CoffeeShopDB_production",
-    "host": "127.0.0.1",
+    "username": "kunbrcom_chuong",
+    "password": "TangKhanhChuong@1",
+    "database": "kunbrcom_chuongtinhyeu",
+    "host": "45.252.248.11",
     "dialect": "mysql",
     "operatorsAliases": false
   }

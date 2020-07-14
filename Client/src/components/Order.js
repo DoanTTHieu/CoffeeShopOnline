@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-import { ipv4, port } from "../constant/constant";
+import { hostname } from "../constant/constant";
 
 const Order = (props) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const url = `http://${ipv4}:${port}/order/${props.id}/total`;
+    const url = `http://${hostname}/order/${props.id}/total`;
     const fetchData = () => {
       fetch(url)
         .then((res) => res.json())

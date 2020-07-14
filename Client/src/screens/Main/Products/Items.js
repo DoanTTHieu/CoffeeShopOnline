@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FlatList, View, Text } from "react-native";
 import { useSelector } from "react-redux";
 import Item from "./Item";
-import { ipv4, port } from "../../../constant/constant";
+import { hostname } from "../../../constant/constant";
 import * as Animatable from "react-native-animatable";
 
 const Items = (props) => {
@@ -19,7 +19,7 @@ const Items = (props) => {
     if (!props.filter) route = "product";
     else route = `product/search/?v=${searchedKeys}`;
 
-    const url = `http://${ipv4}:${port}/${route}`;
+    const url = `http://${hostname}/${route}`;
     fetch(url)
       .then((res) => res.json())
       .then((resData) => {

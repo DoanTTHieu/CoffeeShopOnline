@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { ipv4, port } from "../../../constant/constant";
+import { hostname } from "../../../constant/constant";
 import { changeUser } from "../../../store/actions/users";
 
 const backIcon = require("../../../../assets/icons/blackback.png");
@@ -34,7 +34,7 @@ const ProductDetail = (props) => {
   );
 
   const addToCartHandler = () => {
-    const url = `http://${ipv4}:${port}/product/${selectedItem.id}/addToCart`;
+    const url = `http://${hostname}/product/${selectedItem.id}/addToCart`;
 
     fetch(url, {
       method: "POST",
@@ -47,8 +47,8 @@ const ProductDetail = (props) => {
       }),
     })
       .then(() => {
-        const url = `http://${ipv4}:${port}/cart/${currentCart.id}/detail`;
-        fetch(`http://${ipv4}:${port}/cart/${currentCart.id}/detail`)
+        const url = `http://${hostname}/cart/${currentCart.id}/detail`;
+        fetch(`http://${hostname}/cart/${currentCart.id}/detail`)
           .then((data) => {
             return data.json();
           })
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   image: {
-    height: width -20,
-    width: width -20,
+    height: width - 20,
+    width: width - 20,
   },
 });

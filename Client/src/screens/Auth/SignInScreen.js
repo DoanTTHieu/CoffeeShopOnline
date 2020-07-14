@@ -13,7 +13,7 @@ import Feather from "react-native-vector-icons/Feather";
 import * as Animatable from "react-native-animatable";
 
 import { changeUser } from "../../store/actions/users";
-import { ipv4, port } from "../../constant/constant";
+import { hostname } from "../../constant/constant";
 
 const SignInScreen = (props) => {
   const isFirstRun = useRef(true);
@@ -92,7 +92,7 @@ const SignInScreen = (props) => {
       isFirstRun.current = false;
       return;
     }
-    const url = `http://${ipv4}:${port}/auth/login`;
+    const url = `http://${hostname}/auth/login`;
     fetch(url, {
       method: "POST",
       headers: {
@@ -111,14 +111,15 @@ const SignInScreen = (props) => {
         return res.json();
       })
       .then(() => {
-        const url = `http://${ipv4}:${port}/user/getUserId/?username=${data.username}`;
+        const url = `http://${hostname}/user/getUserId/?username=${data.username}`;
         fetch(url)
-          .then((res) => res.json())
+          .then((res) => {
+            return res.json();
+          })
           .then((resData) => {
             getUserHandler(resData);
           });
       })
-
       .then(() => {
         props.navigation.navigate("SuccessfulValidation");
       })
